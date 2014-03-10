@@ -2,7 +2,7 @@
 
 class Cryptography {
 
-    public function encypt(array $numbers) {
+    public function encrypt(array $numbers) {
         $base = 1;
         foreach ($numbers as $number) $base *= $number;
         foreach ($numbers as $number) $results[] = $base / $number * ($number + 1);
