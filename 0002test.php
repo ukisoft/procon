@@ -1,6 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
 require_once('0002.php');
 
 class InterestingPartyTest extends PHPUnit_Framework_TestCase {
