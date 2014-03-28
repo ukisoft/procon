@@ -7,9 +7,7 @@ class FriendScore {
         // 元の$friendでYになっていた場合、該当する$friendで、Y、且つ元の$friendがNの数を数える
         // 上記の合計が最大のものを返す
 
-        $return = [];
-
-        foreach ($friends as $friend) {
+        return max(array_map(function($friend) use ($friends) {
             $countY = 0;
             $friendStatuses = str_split($friend);
 
@@ -20,8 +18,7 @@ class FriendScore {
                     }
                 }
             }
-            $return[] = $countY;
-        }
-        return max($return);
+            return $countY;
+        }, $friends));
     }
 }

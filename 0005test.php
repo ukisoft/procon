@@ -36,5 +36,11 @@ class ThePalindromeTest extends PHPUnit_Framework_TestCase {
         $actual = $this->targetClass->find('abdfhdyrbdbsdfghjkllkjhgfds');
         $this->assertEquals($expected, $actual);
     }
+
+    function test_find_set5() {
+        $expected = 11;
+        $actual = $this->targetClass->find('abcbca');
+        $this->assertEquals($expected, $actual);
+    }
 }
 
