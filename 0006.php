@@ -7,18 +7,19 @@ class FriendScore {
         // 元の$friendでYになっていた場合、該当する$friendで、Y、且つ元の$friendがNの数を数える
         // 上記の合計が最大のものを返す
 
-        return max(array_map(function($friend) use ($friends) {
-            $countY = 0;
-            $friendStatuses = str_split($friend);
+        foreach ($friends as $baseFriendKey => $baseFriend) {
 
-            foreach ($friendStatuses as $friendColumn => $friendStatus) {
-                if ($friendStatus === 'Y') {
-                    foreach (str_split($friends[$friendColumn]) as $key => $value) {
-                        if ($value === 'Y' && $friendStatuses[$key] === 'N') $countY++;
-                    }
-                }
-            }
-            return $countY;
-        }, $friends));
+            $result[] = array_sum(array_map(function($comparedFriend) use ($baseFriendKey, $baseFriend) {
+
+                if ($comparedFriend[$baseFriendKey] === 'N') return 0;
+
+                return array_count_values(array_map(function($baseFriendStatus, $comparedFriendStatus) {
+                    return $baseFriendStatus.$comparedFriendStatus;
+                }, str_split($baseFriend), str_split($comparedFriend)))["NY"];
+
+            }, $friends));
+        }
+
+        return max($result);
     }
 }
