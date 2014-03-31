@@ -7,11 +7,11 @@ class FriendScore {
         // 元の$friendでYになっていた場合、該当する$friendで、Y、且つ元の$friendがNの数を数える
         // 上記の合計が最大のものを返す
 
-        foreach ($friends as $baseFriendKey => $baseFriend) {
+        foreach ($friends as $baseFriendRowNo => $baseFriend) {
 
-            $result[] = array_sum(array_map(function($comparedFriend) use ($baseFriendKey, $baseFriend) {
+            $result[] = array_sum(array_map(function($comparedFriend) use ($baseFriendRowNo, $baseFriend) {
 
-                if ($comparedFriend[$baseFriendKey] === 'N') return 0;
+                if ($comparedFriend[$baseFriendRowNo] === 'N') return 0;
 
                 return array_count_values(array_map(function($baseFriendStatus, $comparedFriendStatus) {
                     return $baseFriendStatus.$comparedFriendStatus;
