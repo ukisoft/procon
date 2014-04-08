@@ -25,6 +25,8 @@ class MazeMaker {
             MazeMaker::$FOOTPRINT[] = array_fill(0, count($mapRow), MazeMaker::$ASSUMED_MAX_FOOTPRINT_COUNT);
         }
 
+        MazeMaker::$FOOTPRINT[$startRow][$startCol] = 0; // スタート地点の初期化
+
         // 移動
         for ($i = 0; $i < count(MazeMaker::$MOVE_ROW); $i++) {
             $this->move($startRow, $startCol, MazeMaker::$MOVE_ROW[$i], MazeMaker::$MOVE_COL[$i], 1);
@@ -35,10 +37,6 @@ class MazeMaker {
 
         for ($i = 0; $i < count(MazeMaker::$MAP); $i++) {
             for ($j = 0; $j < count(MazeMaker::$MAP[0]); $j++) {
-                if ($i === $startRow && $j === $startCol && MazeMaker::$FOOTPRINT[$i][$j] === MazeMaker::$ASSUMED_MAX_FOOTPRINT_COUNT) {
-                    $result = max([$result, 0]); // スタート地点に戻れない、且つそこにゴールがある場合
-                    continue;
-                }
                 if (MazeMaker::$MAP[$i][$j] === '.' && MazeMaker::$FOOTPRINT[$i][$j] === MazeMaker::$ASSUMED_MAX_FOOTPRINT_COUNT) return -1; // 行けない場所があれば-1
                 if (MazeMaker::$FOOTPRINT[$i][$j] === MazeMaker::$ASSUMED_MAX_FOOTPRINT_COUNT) continue; // 進入不可の場所
                 $result = max([$result, MazeMaker::$FOOTPRINT[$i][$j]]);
