@@ -17,7 +17,7 @@ class MazeMaker {
         MazeMaker::$MOVE_ROW = $moveRow;
         MazeMaker::$MOVE_COL = $moveCol;
 
-        MazeMaker::$ASSUMED_MAX_FOOTPRINT_COUNT = 100; // 仮置き
+        MazeMaker::$ASSUMED_MAX_FOOTPRINT_COUNT = 10000; // 仮置き
 
         foreach ($maze as $row) {
             $mapRow = str_split($row);
