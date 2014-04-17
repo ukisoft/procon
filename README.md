@@ -11,3 +11,4 @@ programming contest
 - no.6 FriendScore
 - no.7 CrazyBot
 - no.8 MazeMaker
+- no.9 NumberMagicEasy
