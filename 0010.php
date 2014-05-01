@@ -55,7 +55,7 @@ class CorporationSalary
         foreach ($manageList as $manageTarget => $manageStatus) {
             if ($manageStatus === 'Y') {
                 if (array_key_exists($manageTarget, $this->salaries) === false) {
-                    throw new \Exception('給与未計算');
+                    throw new \OutOfRangeException('給与未計算');
                 } else {
                     $salary += $this->salaries[$manageTarget];
                 }
