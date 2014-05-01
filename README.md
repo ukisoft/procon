@@ -12,3 +12,4 @@ programming contest
 - no.7 CrazyBot
 - no.8 MazeMaker
 - no.9 NumberMagicEasy
+- no.10 CorporationSalary
