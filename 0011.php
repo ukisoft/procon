@@ -5,6 +5,7 @@ namespace Procon;
 class BadNeighbors
 {
     private $donations;
+    private $memo;
 
     public function maxDonations($donations)
     {
@@ -15,45 +16,40 @@ class BadNeighbors
         // 隣人チェックで隣になったパターンをフィルタする
         // foreachでcalcDonationを呼ぶ
         // 計算したdonationは、メモに格納する
+
         $this->donations = $donations;
+        $this->memo = [];
         $numberOfPeople = count($donations);
-        $result = [];
-        for ($i = 0; $i < pow(2, $numberOfPeople); $i++) {
+        $patterns = [];
+
+        for ($i = 1; $i < pow(2, $numberOfPeople); $i++) {
             $pattern = sprintf('%0' . (String)$numberOfPeople . 'b', $i);
             if (preg_match('/^1[01]*1$|11/', $pattern) === 0) {
-                $result[] = $this->calcDonation($pattern);
+                $patterns[] = $pattern;
             }
+        }
+
+        $result = [];
+        foreach ($patterns as $pattern) {
+            $result[] = $this->calcDonation($pattern);
         }
 
         return max($result);
     }
 
-//    private function makePatterns($numberOfPeople)
-//    {
-//        if ($numberOfPeople === 1) {
-//            return ['0', '1'];
-//        }
-//
-//        $patterns = [];
-//        foreach ($this->makePatterns($numberOfPeople - 1) as $pattern) {
-//            $patterns[] = '0' . $pattern;
-//            $patterns[] = $pattern . '0';
-//        }
-//        return $patterns;
-//    }
-
     private function calcDonation($pattern)
     {
-        // keyの1の数が1つだったら計算する
-        // 2つ以上だったら、一番右側にある1を0にしたパターンを探し、値をとってきて、donationを計算する
-        // 値がない場合は、再帰的に探し続ける
-        $result = 0;
-        foreach (str_split($pattern) as $peopleNo => $donationFlg) {
-            if ($donationFlg === '1') {
-                $result += $this->donations[$peopleNo];
-            }
+        if (array_key_exists($pattern, $this->memo)) {
+            return $this->memo[$pattern];
         }
-
-        return $result;
+        $firstOnePosition = strpos($pattern, '1');
+        if (array_sum(str_split($pattern)) === 1) {
+            $donation = $this->donations[$firstOnePosition];
+            $this->memo[$pattern] = $donation;
+            return $donation;
+        }
+        $donation = $this->calcDonation(substr($pattern, 0, $firstOnePosition) . '0' . substr($pattern, $firstOnePosition + 1)) + $this->donations[$firstOnePosition];
+        $this->memo[$pattern] = $donation;
+        return $donation;
     }
 }
