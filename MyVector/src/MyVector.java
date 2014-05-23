@@ -6,7 +6,7 @@ public class MyVector implements Iterator {
     private Object[] objects;
     private int iteratorIndex = 0;
 
-    public void MyVector(Object... objects)
+    MyVector(Object... objects)
     {
         this.objectSize = objects.length;
         this.objects = new Object[this.objectSize * 2];
@@ -15,7 +15,7 @@ public class MyVector implements Iterator {
         }
     }
 
-    public void MyVector()
+    MyVector()
     {
         objects = new Object[8];
     }
@@ -23,7 +23,7 @@ public class MyVector implements Iterator {
     public boolean add(Object object)
     {
         if (this.objectSize >= this.objects.length) this.extendMemory();
-        this.objects[this.objectSize - 1] = object;
+        this.objects[this.objectSize] = object;
         this.objectSize++;
         return true;
     }
@@ -72,8 +72,8 @@ public class MyVector implements Iterator {
         if (this.objectSize >= this.objects.length) this.extendMemory();
         Object oldObject = this.objects[index];
         for (int i = this.objectSize - 1; i >= index; i--) {
-            if (i != index) this.objects[i + 1] = this.objects[i];
-            else this.objects[i] = object;
+            this.objects[i + 1] = this.objects[i];
+            if (i == index) this.objects[i] = object;
         }
         this.objectSize++;
         return oldObject;
@@ -88,13 +88,14 @@ public class MyVector implements Iterator {
 
     public void remove()
     {
-        this.remove(this.iteratorIndex);
         this.iteratorIndex--;
+        this.remove(this.iteratorIndex);
     }
 
     public boolean hasNext()
     {
         if (this.iteratorIndex < this.objectSize) return true;
+        this.iteratorIndex = 0;
         return false;
     }
 
@@ -116,7 +117,7 @@ public class MyVector implements Iterator {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         while (this.hasNext()) {
-            stringBuilder.append(this.next());
+            stringBuilder.append(this.next() + ", ");
         }
         return stringBuilder.toString();
     }
