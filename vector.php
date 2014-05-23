@@ -51,8 +51,9 @@ class Vector
         if (array_key_exists($index, $this->array) === false) {
             throw new \OutOfRangeException;
         }
+        $oldObject = $this->array[$index];
         $this->array[$index] = $object;
-        return $object; // true or false?
+        return $oldObject;
     }
 
     public function size()
