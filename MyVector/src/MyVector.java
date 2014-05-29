@@ -9,13 +9,7 @@ public class MyVector implements Iterable, Iterator {
     MyVector(Object... objects)
     {
         this.objectSize = objects.length;
-        if (this.objectSize < 2147483647 / 2) {
-            this.objects = new Object[this.objectSize * 2];
-        } else if (this.objectSize >= 2147483647 / 2 && this.objectSize < 2147483647) {
-            this.objects = new Object[2147483647];
-        } else {
-            throw new OutOfMemoryError();
-        }
+        this.objects = new Object[this.objectSize * 2];
         for (int i = 0; i < this.objectSize; i++) {
         this.objects[i] = objects[i];
         }
