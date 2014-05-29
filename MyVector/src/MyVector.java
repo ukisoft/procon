@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class MyVector implements Iterator {
+public class MyVector implements Iterable, Iterator {
 
     private int objectSize = 0;
     private Object[] objects;
@@ -9,9 +9,15 @@ public class MyVector implements Iterator {
     MyVector(Object... objects)
     {
         this.objectSize = objects.length;
-        this.objects = new Object[this.objectSize * 2];
+        if (this.objectSize < 2147483647 / 2) {
+            this.objects = new Object[this.objectSize * 2];
+        } else if (this.objectSize >= 2147483647 / 2 && this.objectSize < 2147483647) {
+            this.objects = new Object[2147483647];
+        } else {
+            throw new OutOfMemoryError();
+        }
         for (int i = 0; i < this.objectSize; i++) {
-            this.objects[i] = objects[i];
+        this.objects[i] = objects[i];
         }
     }
 
@@ -23,8 +29,7 @@ public class MyVector implements Iterator {
     public boolean add(Object object)
     {
         if (this.objectSize >= this.objects.length) this.extendMemory();
-        this.objects[this.objectSize] = object;
-        this.objectSize++;
+        this.objects[this.objectSize++] = object;
         return true;
     }
 
@@ -59,45 +64,50 @@ public class MyVector implements Iterator {
     {
         if (this.isIndexOutOfBounds(index)) throw new ArrayIndexOutOfBoundsException(index);
         Object oldObject = this.objects[index];
-        for (int i = index; i < this.objectSize; i++) {
+        for (int i = index; i < this.objectSize - 1; i++) {
             this.objects[i] = this.objects[i + 1];
         }
         this.objectSize--;
         return oldObject;
     }
 
-    public Object insert(int index, Object object)
+    public void insert(int index, Object object)
     {
+        if (index == this.objectSize) {
+            this.add(object);
+            return;
+        }
         if (this.isIndexOutOfBounds(index)) throw new ArrayIndexOutOfBoundsException(index);
         if (this.objectSize >= this.objects.length) this.extendMemory();
-        Object oldObject = this.objects[index];
         for (int i = this.objectSize - 1; i >= index; i--) {
             this.objects[i + 1] = this.objects[i];
             if (i == index) this.objects[i] = object;
         }
         this.objectSize++;
-        return oldObject;
     }
 
     public Object next()
     {
-        Object nextObject = this.objects[this.iteratorIndex];
-        this.iteratorIndex++;
-        return nextObject;
+        return this.objects[this.iteratorIndex++];
     }
 
     public void remove()
     {
-        this.iteratorIndex--;
-        this.remove(this.iteratorIndex);
+        this.remove(--this.iteratorIndex);
     }
 
     public boolean hasNext()
     {
         if (this.iteratorIndex < this.objectSize) return true;
-        this.iteratorIndex = 0;
         return false;
     }
+
+    public Iterator iterator()
+    {
+        this.iteratorIndex = 0;
+        return this;
+    }
+
 
     private void extendMemory()
     {
@@ -116,8 +126,12 @@ public class MyVector implements Iterator {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        while (this.hasNext()) {
-            stringBuilder.append(this.next() + ", ");
+        for (int i = 0; i < this.objectSize; i++) {
+            if (i == 0) {
+                stringBuilder.append(this.objects[i]);
+            } else {
+                stringBuilder.append(", " + this.objects[i]);
+            }
         }
         return stringBuilder.toString();
     }

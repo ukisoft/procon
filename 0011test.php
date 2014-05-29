@@ -20,7 +20,7 @@ class BadNeighborsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provider
      */
-    public function testMaxDonationsSet1($actualDonations, $expected)
+    public function testMaxDonations($actualDonations, $expected)
     {
         $actual = $this->targetClass->maxDonations($actualDonations);
         $this->assertEquals($expected, $actual);

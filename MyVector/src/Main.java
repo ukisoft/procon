@@ -43,11 +43,35 @@ public class Main {
         MyVector myVector3 = new MyVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         System.out.println(myVector3);
 
-        while (myVector3.hasNext()) {
-            Object object = myVector3.next();
+        for (Object object: myVector3) {
             int i = (Integer)object;
             if (i % 2 == 1) myVector3.remove();
         }
         System.out.println(myVector3);
+
+        for (Object object: myVector3) {
+            int i = (Integer)object;
+            if (i % 3 == 0) myVector3.remove();
+        }
+        System.out.println(myVector3);
+
+        MyVector myVector4 = new MyVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        System.out.println(myVector4);
+
+        for (Object object: myVector4) {
+            int i = (Integer)object;
+            if (i == 6) {
+                System.out.println(i);
+                break;
+            }
+        }
+
+        for (Object object: myVector4) {
+            int i = (Integer) object;
+            if (i == 2) {
+                System.out.println(i);
+                break;
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ class CorporationSalaryTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provider
      */
-    public function testTotalSalarySet1($actualRelations, $expected)
+    public function testTotalSalary($actualRelations, $expected)
     {
         $actual = $this->targetClass->totalSalary($actualRelations);
         $this->assertEquals($expected, $actual);

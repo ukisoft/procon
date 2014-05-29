@@ -14,3 +14,4 @@ programming contest
 - no.9 NumberMagicEasy
 - no.10 CorporationSalary
 - no.11 BadNeighbors
+- no.12 ChessMetric
