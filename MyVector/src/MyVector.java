@@ -10,8 +10,8 @@ public class MyVector implements Iterable, Iterator {
     {
         this.objectSize = objects.length;
         this.objects = new Object[this.objectSize * 2];
-        for (int i = 0; i < this.objectSize; i++) {
-        this.objects[i] = objects[i];
+        for (int i = 0; i < objects.length; i++) {
+            this.objects[i] = objects[i];
         }
     }
 

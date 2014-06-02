@@ -2,8 +2,12 @@ public class Main {
 
     public static void main(String[] args)
     {
-        System.out.println("start MyVector test");
+        System.out.println("start test");
+        Main.testMyLinkedList();
+    }
 
+    private static void testMyVector()
+    {
         MyVector myVector1 = new MyVector();
         System.out.println(myVector1);
 
@@ -24,7 +28,7 @@ public class Main {
         System.out.println(myVector2.get(2));
 
         try {
-            System.out.println(myVector2.get(5));
+            System.out.println(myVector2.get(10));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -73,5 +77,46 @@ public class Main {
                 break;
             }
         }
+    }
+
+    private static void testMyLinkedList()
+    {
+        MyLinkedList myLinkedList1 = new MyLinkedList();
+        System.out.print(myLinkedList1);
+
+        MyLinkedList myLinkedList2 = new MyLinkedList("a", "b", "c");
+        System.out.print(myLinkedList2);
+
+        myLinkedList2.add("d");
+        myLinkedList2.add("d");
+        myLinkedList2.add("d");
+        myLinkedList2.add("d");
+        myLinkedList2.add("d");
+        myLinkedList2.add("d");
+        System.out.print(myLinkedList2);
+
+        if (myLinkedList2.contains("a")) System.out.println("myLinkedList2 contains a");
+        if (myLinkedList2.contains("e")) System.out.println("myLinkedList2 contains e");
+
+        System.out.println(myLinkedList2.get(2));
+
+        try {
+            System.out.println(myLinkedList2.get(10));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        myLinkedList2.set(0, "f");
+        System.out.println(myLinkedList2);
+
+        System.out.println(myLinkedList2.size());
+
+        myLinkedList2.remove(0);
+        myLinkedList2.remove(3);
+        System.out.println(myLinkedList2);
+
+        myLinkedList2.insert(1, "g");
+        System.out.println(myLinkedList2);
+        System.out.println(myLinkedList2.size());
     }
 }
