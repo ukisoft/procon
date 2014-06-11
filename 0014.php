@@ -14,11 +14,8 @@ class ColorfulBoxesAndBalls
          * 同じか小さくなれば、入替えをキャンセルしてreturn
          */
 
-        $result = $numRed * $onlyRed + $numBlue * $onlyBlue;
-        $testResult = ($numRed - 1) * $onlyRed + ($numBlue - 1) * $onlyBlue + 2 * $bothColors;
-
-        if ($result > $testResult) {
-            return $result;
+        if ($onlyRed + $onlyBlue > $bothColors * 2) {
+            return $numRed * $onlyRed + $numBlue * $onlyBlue;
         } else {
             $maxChangeableNum = min($numRed, $numBlue);
             return ($numRed - $maxChangeableNum) * $onlyRed
