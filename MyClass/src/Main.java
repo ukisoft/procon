@@ -118,5 +118,43 @@ public class Main {
         myLinkedList2.insert(1, "g");
         System.out.println(myLinkedList2);
         System.out.println(myLinkedList2.size());
+
+        MyLinkedList myLinkedList3 = new MyLinkedList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        System.out.println(myLinkedList3);
+
+        for (Object object: myLinkedList3) {
+            System.out.println(object);
+        }
+
+//        for (Object object: myLinkedList3) {
+//            int i = (Integer)object;
+//            if (i % 2 == 1) myLinkedList3.remove();
+//        }
+//        System.out.println(myLinkedList3);
+
+//        for (Object object: myLinkedList3) {
+//            int i = (Integer)object;
+//            if (i % 3 == 0) myLinkedList3.remove();
+//        }
+//        System.out.println(myLinkedList3);
+
+        MyLinkedList myLinkedList4 = new MyLinkedList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        System.out.println(myLinkedList4);
+
+        for (Object object: myLinkedList4) {
+            int i = (Integer)object;
+            if (i == 6) {
+                System.out.println(i);
+                break;
+            }
+        }
+
+        for (Object object: myLinkedList4) {
+            int i = (Integer) object;
+            if (i == 2) {
+                System.out.println(i);
+                break;
+            }
+        }
     }
 }

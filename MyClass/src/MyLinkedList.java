@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class MyLinkedList// implements Iterable, Iterator
+public class MyLinkedList implements Iterable, Iterator
 {
 
     private class Node
@@ -30,6 +30,9 @@ public class MyLinkedList// implements Iterable, Iterator
 
 
     private Node firstNode;
+    private Node iteratorNode;
+    private Node previousIteratorNode;
+    private Node firstIteratorNode;
 
     MyLinkedList()
     {
@@ -190,14 +193,37 @@ public class MyLinkedList// implements Iterable, Iterator
         previousNode.nextNode.nextNode = nextNode;
     }
 
+    public Object next()
+    {
+        Node previousNode = this.iteratorNode;
+        this.iteratorNode = this.iteratorNode.nextNode;
+        return previousNode.object;
+    }
+
+    public boolean hasNext()
+    {
+        return this.iteratorNode != null;
+    }
+
+    public void remove()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    public Iterator iterator()
+    {
+        this.iteratorNode = this.firstNode;
+        return this;
+    }
+
     @Override
     public String toString()
     {
-        StringBuilder stringBuilder = new StringBuilder();
         if (this.firstNode == null) {
-            stringBuilder.append("no node");
+            return  "no node \n";
         }
 
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.firstNode);
         Node previousNode = this.firstNode;
 
