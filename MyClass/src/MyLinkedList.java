@@ -1,5 +1,6 @@
+import java.util.Iterator;
 
-public class MyLinkedList
+public class MyLinkedList// implements Iterable, Iterator
 {
 
     private class Node
@@ -12,6 +13,14 @@ public class MyLinkedList
             this.object = object;
         }
 
+        public boolean hasNext()
+        {
+            if (nextNode == null) {
+                return false;
+            }
+            return true;
+        }
+
         @Override
         public String toString()
         {
@@ -19,193 +28,184 @@ public class MyLinkedList
         }
     }
 
-    private int size;
+
     private Node firstNode;
 
     MyLinkedList()
     {
-        this.size = 0;
+        this.firstNode = null;
     }
 
     MyLinkedList(Object... objects)
     {
-        this.size = objects.length;
-        Node previousNode = null;
-        for (int i = 0; i < objects.length; i++) {
-            if (i == 0) {
-                firstNode = previousNode = new Node(objects[i]);
-            } else {
-                Node nextNode = new Node(objects[i]);
-                previousNode.nextNode = nextNode;
-                previousNode = nextNode;
-            }
+        Node previousNode = this.firstNode = new Node(objects[0]);
+
+        for (int i = 1; i < objects.length; i++) {
+            Node nextNode = new Node(objects[i]);
+            previousNode.nextNode = nextNode;
+            previousNode = nextNode;
         }
     }
 
     public boolean add(Object object)
     {
-        if (this.size == 0) {
+        if (this.firstNode == null) {
             this.firstNode = new Node(object);
-            this.size++;
             return true;
         }
 
-        Node nextNode = null;
-        for (int i = 0; i < this.size - 1; i++) {
-            if (i == 0) {
-                nextNode = this.firstNode.nextNode;
-            } else {
-                nextNode = nextNode.nextNode;
-            }
+        Node previousNode = this.firstNode;
+        while (previousNode.hasNext()) {
+            previousNode = previousNode.nextNode;
         }
-        nextNode.nextNode = new Node(object);
-        this.size++;
+
+        previousNode.nextNode = new Node(object);
         return true;
     }
 
     public boolean contains(Object object)
     {
-        Node nextNode = null;
-        for (int i = 0; i < this.size - 1; i++) {
-            if (i == 0) {
-                if (this.firstNode.object == object) return true;
-                nextNode = this.firstNode.nextNode;
-            } else {
-                if (nextNode.object == object) return true;
-                nextNode = nextNode.nextNode;
+        if (this.firstNode == null) {
+            return false;
+        }
+
+        Node previousNode = this.firstNode;
+        while (previousNode.hasNext()) {
+            if (previousNode.object.equals(object)) {
+                return true;
             }
+            previousNode = previousNode.nextNode;
         }
         return false;
     }
 
     public Object get(int index)
     {
-        if (this.isIndexOutOfBounds(index)) throw new ArrayIndexOutOfBoundsException(index);
-        if (index == 0) return this.firstNode.object;
+        if (index == 0) {
+            if (this.firstNode == null) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return this.firstNode.object;
+        }
 
-        Node nextNode = null;
-        for (int i = 0; i < index; i++) {
-            if (i == 0) {
-                nextNode = this.firstNode.nextNode;
-            } else {
-                nextNode = nextNode.nextNode;
+        Node previousNode = this.firstNode;
+        for (int i = 1; i <= index; i++) {
+            previousNode = previousNode.nextNode;
+            if (previousNode == null) {
+                throw new ArrayIndexOutOfBoundsException(index);
             }
         }
-        return nextNode.object;
+        return previousNode.object;
     }
 
     public Object set(int index, Object object)
     {
-        if (this.isIndexOutOfBounds(index)) throw new ArrayIndexOutOfBoundsException(index);
         if (index == 0) {
-            Node oldNode = this.firstNode;
-            this.firstNode = new Node(object);
-            this.firstNode.nextNode = oldNode.nextNode;
-            return oldNode.object;
+            if (this.firstNode == null) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            Object oldObject = this.firstNode.object;
+            this.firstNode.object = object;
+            return oldObject;
         }
 
-        Node previousNode = null;
-        Node oldNode = null;
-        Node nextNode = null;
-        for (int i = 0; i < index - 1; i++) {
-            if (i == 0) {
-                previousNode = this.firstNode;
-            } else {
-                previousNode = previousNode.nextNode;
-                if (i == index - 2) {
-                    oldNode = previousNode.nextNode;
-                    nextNode = oldNode.nextNode;
-                }
+        Node previousNode = this.firstNode;
+        for (int i = 1; i <= index; i++) {
+            previousNode = previousNode.nextNode;
+            if (previousNode == null) {
+                throw new ArrayIndexOutOfBoundsException(index);
             }
         }
-
-        previousNode.nextNode = new Node(object);
-        previousNode.nextNode.nextNode = nextNode;
-        return oldNode.object;
+        Object oldObject = previousNode.object;
+        previousNode.object = object;
+        return oldObject;
     }
 
     public int size()
     {
-        return this.size;
+        if (this.firstNode == null) {
+            return 0;
+        }
+
+        Node previousNode = this.firstNode;
+        int i = 1;
+        for (; previousNode.hasNext(); i++) {
+            previousNode = previousNode.nextNode;
+        }
+        return i;
     }
 
     public Object remove(int index)
     {
-        if (this.isIndexOutOfBounds(index)) throw new ArrayIndexOutOfBoundsException(index);
         if (index == 0) {
-            Node oldNode = this.firstNode;
-            this.firstNode = oldNode.nextNode;
-            this.size--;
-            return oldNode.object;
+            if (this.firstNode == null) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+
+            Object oldObject = this.firstNode.object;
+            this.firstNode = this.firstNode.nextNode;
+            return oldObject;
         }
 
-        Node previousNode = null;
-        Node oldNode = null;
-        Node nextNode = null;
-        for (int i = 0; i < index - 1; i++) {
-            if (i == 0) {
-                previousNode = this.firstNode;
-            } else {
-                previousNode = previousNode.nextNode;
-                if (i == index - 2) {
-                    oldNode = previousNode.nextNode;
-                    nextNode = oldNode.nextNode;
-                }
+        Node previousNode = this.firstNode;
+        for (int i = 1; i < index; i++) {
+            previousNode = previousNode.nextNode;
+            if (previousNode == null) {
+                throw new ArrayIndexOutOfBoundsException(index);
             }
         }
 
-        previousNode.nextNode = nextNode;
-        this.size--;
-        return oldNode.object;
+        if (previousNode.hasNext() == false) {
+            throw new ArrayIndexOutOfBoundsException(index);
+        }
+
+        Object oldObject = previousNode.nextNode.object;
+        previousNode.nextNode = previousNode.nextNode.nextNode;
+        return oldObject;
     }
 
     public void insert(int index, Object object)
     {
-        if (index == this.size) this.add(object);
-
-        if (this.isIndexOutOfBounds(index)) throw new ArrayIndexOutOfBoundsException(index);
         if (index == 0) {
+            if (this.firstNode == null) {
+                this.firstNode = new Node(object);
+                return;
+            }
             Node nextNode = this.firstNode;
             this.firstNode = new Node(object);
             this.firstNode.nextNode = nextNode;
-            this.size++;
+            return;
         }
 
-        Node nextNode = null;
-        Node previousNode = null;
-        for (int i = 0; i < index; i++) {
-            if (i == 0) {
-                previousNode = this.firstNode;
-            } else {
-                previousNode = previousNode.nextNode;
-                }
-            if (i == index - 1) nextNode = previousNode.nextNode;
+        Node previousNode = this.firstNode;
+        for (int i = 1; i < index; i++) {
+            previousNode = previousNode.nextNode;
+            if (previousNode == null) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
         }
 
+        Node nextNode = previousNode.nextNode;
         previousNode.nextNode = new Node(object);
         previousNode.nextNode.nextNode = nextNode;
-        this.size++;
-    }
-
-    private boolean isIndexOutOfBounds(int index)
-    {
-        return index < 0 || index > this.size - 1;
     }
 
     @Override
     public String toString()
     {
         StringBuilder stringBuilder = new StringBuilder();
-        Node previousNode = null;
-        for (int i = 0; i < this.size; i++) {
-            if (i == 0) {
-                stringBuilder.append(this.firstNode);
-                previousNode = this.firstNode;
-            } else {
-                previousNode = previousNode.nextNode;
-                stringBuilder.append(", " + previousNode);
-            }
+        if (this.firstNode == null) {
+            stringBuilder.append("no node");
         }
+
+        stringBuilder.append(this.firstNode);
+        Node previousNode = this.firstNode;
+
+        while (previousNode.hasNext()) {
+            previousNode = previousNode.nextNode;
+            stringBuilder.append(", " + previousNode);
+        }
+
         return stringBuilder.toString() + "\n";
 
     }
