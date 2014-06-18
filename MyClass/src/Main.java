@@ -3,7 +3,53 @@ public class Main {
     public static void main(String[] args)
     {
         System.out.println("start test");
-        Main.testMyLinkedList();
+        Main.testMyQueue();
+    }
+
+    private static void testMyQueue()
+    {
+        MyQueue myQueue1 = new MyQueue();
+        System.out.println(myQueue1);
+
+        MyQueue myQueue2 = new MyQueue("a", "b", "c");
+        System.out.println(myQueue2);
+
+        myQueue2.add("d");
+        System.out.println(myQueue2);
+
+        try {
+            System.out.println(myQueue1.remove());
+            System.out.println(myQueue1);
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+
+        try {
+            System.out.println(myQueue1.poll());
+            System.out.println(myQueue1);
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+
+        System.out.println(myQueue2.remove());
+        System.out.println(myQueue2);
+
+        try {
+            System.out.println(myQueue1.element());
+            System.out.println(myQueue1);
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+
+        try {
+            System.out.println(myQueue1.peek());
+            System.out.println(myQueue1);
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+
+        System.out.println(myQueue2.element());
+        System.out.println(myQueue2);
     }
 
     private static void testMyVector()

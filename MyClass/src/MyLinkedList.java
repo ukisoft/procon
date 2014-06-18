@@ -31,8 +31,6 @@ public class MyLinkedList implements Iterable, Iterator
 
     private Node firstNode;
     private Node iteratorNode;
-    private Node previousIteratorNode;
-    private Node firstIteratorNode;
 
     MyLinkedList()
     {
@@ -233,6 +231,5 @@ public class MyLinkedList implements Iterable, Iterator
         }
 
         return stringBuilder.toString() + "\n";
-
     }
 }
