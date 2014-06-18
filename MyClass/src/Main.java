@@ -3,7 +3,45 @@ public class Main {
     public static void main(String[] args)
     {
         System.out.println("start test");
-        Main.testMyQueue();
+        Main.testMyStack();
+    }
+
+    private static void testMyStack()
+    {
+        MyStack myStack1 = new MyStack();
+        System.out.println(myStack1);
+
+        MyStack myStack2 = new MyStack("a", "b", "c");
+        System.out.println(myStack2);
+
+        myStack2.push("d");
+        System.out.println(myStack2);
+
+        try {
+            System.out.println(myStack1.remove());
+            System.out.println(myStack1);
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+
+        System.out.println(myStack1.poll());
+        System.out.println(myStack1);
+
+        System.out.println(myStack2.remove());
+        System.out.println(myStack2);
+
+        try {
+            System.out.println(myStack1.element());
+            System.out.println(myStack1);
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+
+        System.out.println(myStack1.peek());
+        System.out.println(myStack1);
+
+        System.out.println(myStack2.element());
+        System.out.println(myStack2);
     }
 
     private static void testMyQueue()
@@ -24,12 +62,8 @@ public class Main {
             System.out.println(e);
         }
 
-        try {
-            System.out.println(myQueue1.poll());
-            System.out.println(myQueue1);
-        } catch (NullPointerException e) {
-            System.out.println(e);
-        }
+        System.out.println(myQueue1.poll());
+        System.out.println(myQueue1);
 
         System.out.println(myQueue2.remove());
         System.out.println(myQueue2);
@@ -41,12 +75,8 @@ public class Main {
             System.out.println(e);
         }
 
-        try {
-            System.out.println(myQueue1.peek());
-            System.out.println(myQueue1);
-        } catch (NullPointerException e) {
-            System.out.println(e);
-        }
+        System.out.println(myQueue1.peek());
+        System.out.println(myQueue1);
 
         System.out.println(myQueue2.element());
         System.out.println(myQueue2);

@@ -28,49 +28,34 @@ public class MyQueue {
 
     public Object remove()
     {
-        Object object = null;
-        try {
-            object = this.myLinkedList.remove(0);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        if (this.myLinkedList.size() <= 0) {
             throw new NullPointerException();
         }
-
-        if (object == null) {
-            throw new NullPointerException();
-        }
-        return object;
+        return this.myLinkedList.remove(0);
     }
 
     public Object poll()
     {
-        try {
-            return this.myLinkedList.remove(0);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NullPointerException();
+        if (this.myLinkedList.size() <= 0) {
+            return null;
         }
+        return this.myLinkedList.remove(0);
     }
 
     public Object element()
     {
-        Object object = null;
-        try {
-            object = this.myLinkedList.get(0);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        if (this.myLinkedList.size() <= 0) {
             throw new NullPointerException();
         }
-        if (object == null) {
-            throw new NullPointerException();
-        }
-        return object;
+        return this.myLinkedList.get(0);
     }
 
     public Object peek()
     {
-        try {
-            return this.myLinkedList.get(0);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NullPointerException();
+        if (this.myLinkedList.size() <= 0) {
+            return null;
         }
+        return this.myLinkedList.get(0);
     }
 
     @Override
