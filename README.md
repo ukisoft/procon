@@ -17,9 +17,12 @@ procon
 - no.12 ChessMetric
 - no.13 HandShaking
 - no.14 ColorfulBoxesAndBalls
+- no.15 StockHistory
 
 
 ##MyClass
 
 - MyVector
-- MyArrayList
+- MyLinkedList
+- MyQueue
+- MyStack
