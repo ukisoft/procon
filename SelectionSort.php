@@ -9,7 +9,7 @@ class SelectionSort
         foreach ($array as $key => &$num) {
             if (is_numeric($num) == false) throw new InvalidArgumentException("引数の配列は、intのみ格納してください。");
             $tmp = [$key, $num];
-            for ($i = $key; $i < count($array); $i++) {
+            for ($i = $key + 1; $i < count($array); $i++) {
                 if ($tmp[1] > $array[$i]) $tmp = [$i, $array[$i]];
             }
             if ($key !== $tmp[0]) {
