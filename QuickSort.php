@@ -22,7 +22,7 @@ class QuickSort
         for ($i = 0; $i < $pivotKey; $i++) {
             if ($array[$i] >= $pivotValue) {
                 for ($j = $arrayNum - 1; $j >= $pivotKey; $j--) {
-                    if ($array[$j] <= $pivotValue) { // <=???
+                    if ($array[$j] <= $pivotValue) {
                         $tmpValue = $array[$i];
                         $array[$i] = $array[$j];
                         $array[$j] = $tmpValue;
