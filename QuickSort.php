@@ -16,48 +16,40 @@ class QuickSort
     static private function sortParts($array)
     {
         $arrayNum = count($array);
-        $arrayNum % 2 == 0 ? $pivotKey = (int)($arrayNum / 2) : $pivotKey = (int)(($arrayNum - 1) / 2);
-        $pivotValue = $array[$pivotKey];
+        $arrayNum % 2 == 0 ? $pivot = $array[(int)($arrayNum / 2)] : $pivot = $array[(int)(($arrayNum - 1) / 2)];
 
-        for ($i = 0; $i < $pivotKey; $i++) {
-            if ($array[$i] >= $pivotValue) {
-                for ($j = $arrayNum - 1; $j >= $pivotKey; $j--) {
-                    if ($array[$j] <= $pivotValue) {
-                        $tmpValue = $array[$i];
-                        $array[$i] = $array[$j];
-                        $array[$j] = $tmpValue;
-                        if ($j == $pivotKey) {
-                            $pivotKey = $i;
-                        }
-                    }
-                }
+        $left = 0;
+        $right = $arrayNum - 1;
+
+        while (true) {
+            while ($left < $arrayNum) {
+                if ($array[$left] >= $pivot) break;
+                $left++;
             }
-        }
 
-        for ($j = $arrayNum - 1; $j > $pivotKey; $j--) {
-            if ($array[$j] < $pivotValue) {
-                for ($i = 0; $i <= $pivotKey; $i++) {
-                    if ($array[$i] >= $pivotValue) {
-                        $tmpValue = $array[$i];
-                        $array[$i] = $array[$j];
-                        $array[$j] = $tmpValue;
-                        if ($i == $pivotKey) {
-                            $pivotKey = $j;
-                        }
-                    }
-                }
+            while ($right >= 0) {
+                if ($array[$right] <= $pivot) break;
+                $right--;
             }
-        }
 
-        $nextArraySet = QuickSort::splitArray($array, $pivotKey);
-        if (count($nextArraySet[0]) > 1) {
-            $nextArraySet[0] = QuickSort::sortParts($nextArraySet[0]);
-        }
-        if (count($nextArraySet[1]) > 1) {
-            $nextArraySet[1] = QuickSort::sortParts($nextArraySet[1]);
-        }
+            if ($left >= $right) {
+                $nextArraySet = QuickSort::splitArray($array, $left);
+                if (count($nextArraySet[0]) > 1) {
+                    $nextArraySet[0] = QuickSort::sortParts($nextArraySet[0]);
+                }
+                if (count($nextArraySet[1]) > 1) {
+                    $nextArraySet[1] = QuickSort::sortParts($nextArraySet[1]);
+                }
+                return array_merge($nextArraySet[0], $nextArraySet[1]);
+            }
 
-        return array_merge($nextArraySet[0], [$pivotValue], $nextArraySet[1]);
+            $tmp = $array[$left];
+            $array[$left] = $array[$right];
+            $array[$right] = $tmp;
+
+            $left++;
+            $right--;
+        }
     }
 
     static private function splitArray($array, $splitKey)
@@ -67,7 +59,7 @@ class QuickSort
             $firstArray[] = $array[$i];
         }
         $secondArray = [];
-        for ($i = $splitKey + 1; $i < count($array); $i++) {
+        for ($i = $splitKey; $i < count($array); $i++) {
             $secondArray[] = $array[$i];
         }
         return [$firstArray, $secondArray];

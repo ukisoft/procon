@@ -29,7 +29,6 @@ class AutoLoan
         while (true) {
             $monthlyLoan = $this->getMonthlyLoanAddedDigit($monthlyLoan);
             if ($this->getAvailableFloatDigit($monthlyLoan) > 17) {
-                var_dump($monthlyLoan);
                 var_dump(bcmul($monthlyLoan, '1200', 100));
                 return bcmul($monthlyLoan, '1200', 100);
             }
