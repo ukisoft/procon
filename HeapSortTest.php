@@ -2,16 +2,16 @@
 
 namespace ProCon;
 
-require_once('SelectionSort.php');
+require_once('HeapSort.php');
 
-class SelectionSortTest extends \PHPUnit_Framework_TestCase
+class HeapSortTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider provider
      */
     public function test_sortInt($array, $expected)
     {
-        $actual = SelectionSort::sortInt($array);
+        $actual = HeapSort::sortInt($array);
         $this->assertEquals($expected, $actual);
     }
 
