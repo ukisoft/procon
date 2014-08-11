@@ -11,11 +11,11 @@ class HeapSort
         }
 
         $i = 0;
-        while (++$i < count($array)) {
+        while (++$i < count($array)) { // 一度、ヒープの条件を満たした配列を作る
             HeapSort::upHeap($array, $i);
         }
 
-        while (--$i > 0) {
+        while (--$i > 0) { // 最大の値を最後の値と入れ替え、再度ヒープ条件を満たす配列を作る
             HeapSort::swap($array, 0, $i);
             HeapSort::downHeap($array, $i);
         }
@@ -27,10 +27,11 @@ class HeapSort
     {
         while ($n > 0) {
             $m = (int)(($n + 1) / 2 - 1);
-            if ($array[$m] >= $array[$n]) {
+            if ($array[$m] < $array[$n]) {
+                HeapSort::swap($array, $n, $m);
+            } else {
                 break;
             }
-            HeapSort::swap($array, $n, $m);
             $n = $m;
         }
     }
@@ -39,8 +40,8 @@ class HeapSort
     {
         $m = $tmp = 0;
         while (true) {
-            $leftChild = (int)(($n + 1) * 2 - 1);
-            $rightChild = (int)(($n + 1) * 2);
+            $leftChild = (int)(($m + 1) * 2 - 1);
+            $rightChild = (int)(($m + 1) * 2);
 
             if ($leftChild >= $n) {
                 break;
@@ -67,54 +68,4 @@ class HeapSort
         $array[$i] = $array[$j];
         $array[$j] = $tmp;
     }
-
-//    static public function sortInt($array)
-//    {
-//        foreach ($array as $num) {
-//            if (is_numeric($num) == false) throw new InvalidArgumentException("引数の配列は、intのみ格納してください。");
-//        }
-//
-//        array_unshift($array, 'dummy');
-//        for ($i = 1; $i < count($array); $i++) {
-//            $array = HeapSort::sortParts($array, $i);
-//        }
-//        array_shift($array);
-//        return $array;
-//    }
-//
-//    static private function sortParts($array, $start)
-//    {
-//        $isFinishedToSwitch = false;
-//        $arrayNum = count($array);
-//        while ($isFinishedToSwitch == false) {
-//            $isFinishedToSwitch = true;
-//            for ($i = $start; $i < $arrayNum; $i++) {
-//                if ($i * 2 >= $arrayNum) break;
-//                if (($i * 2) + 1 < $arrayNum && $array[$i * 2] < $array[$i]) {
-//                    $tmp = $array[$i * 2];
-//                    $array[$i * 2] = $array[$i];
-//                    $array[$i] = $tmp;
-//                    $isFinishedToSwitch = false;
-//                }
-//                elseif (($i * 2) + 1 < $arrayNum && min($array[$i * 2], $array[($i * 2) + 1]) < $array[$i]) {
-//                    if ($array[$i * 2] < $array[($i * 2) + 1]) {
-//                        $tmp = $array[$i * 2];
-//                        $array[$i * 2] = $array[$i];
-//                        $array[$i] = $tmp;
-//                        $isFinishedToSwitch = false;
-//                    }
-//                    else {
-//                        $tmp = $array[($i * 2) + 1];
-//                        $array[($i * 2) + 1] = $array[$i];
-//                        $array[$i] = $tmp;
-//                        $isFinishedToSwitch = false;
-//                    }
-//                }
-//            }
-//        }
-//        $last = $array[$arrayNum - 1];
-//        array_splice($array, $start + 1, 0, $last);
-//        array_pop($array);
-//        return $array;
-//    }
 }
