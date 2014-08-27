@@ -8,7 +8,7 @@ class HamiltonPath
     {
         /*
          * 1つの都市から、3以上の必須経路が伸びていれば、return 0
-         * すべての経路を通る必要がある場合も、return 0
+         * ループが発生する場合も、return 0
          * 2つ経路が伸びていれば、それを1つの都市として扱う
          * 1つの経路の場合、そのまま
          *
@@ -21,7 +21,7 @@ class HamiltonPath
         }, $roads);
 
         if (HamiltonPath::hasOverThreeNecessaryPathsInOneCity($parsedRoads)) return 0;
-        if (HamiltonPath::hasNoUnnecessaryPath($parsedRoads)) return 0;
+        if (HamiltonPath::hasLoopPath($parsedRoads)) return 0;
 
         $necessaryPathNumWithoutChains = HamiltonPath::countNecessaryPathWithoutChains($parsedRoads);
         $necessaryPathNum = HamiltonPath::countNecessaryPath($parsedRoads);
@@ -46,15 +46,25 @@ class HamiltonPath
         return false;
     }
 
-    static private function hasNoUnnecessaryPath($parsedRoads)
+    static private function hasLoopPath($parsedRoads)
     {
-        $unnecessaryPathNum = 0;
-        foreach ($parsedRoads as $parsedRoad) {
-            foreach ($parsedRoad as $path) {
-                if ($path == 'N') $unnecessaryPathNum++;
+        $loopPathNote = [];
+        for ($i = 0; $i < count($parsedRoads); $i++) {
+            $loopPathNote[] = HamiltonPath::findForcedPath($parsedRoads, $i, $i);
+        }
+        return in_array(true, $loopPathNote);
+    }
+
+    static private function findForcedPath($parsedRoads, $startCheckPathNum, $currentCheckPathNum, $pastCheckPathNum = -1)
+    {
+        foreach ($parsedRoads[$currentCheckPathNum] as $cityNum => $path) {
+            if ($path == 'Y') {
+                if ($cityNum == $pastCheckPathNum) continue;
+                if ($pastCheckPathNum != -1 && $cityNum == $startCheckPathNum) return true;
+                if (HamiltonPath::findForcedPath($parsedRoads, $startCheckPathNum, $cityNum, $currentCheckPathNum)) return true;
             }
         }
-        return $unnecessaryPathNum == count($parsedRoads);
+        return false;
     }
 
     static private function countNecessaryPathWithoutChains($parsedRoads)

@@ -31,6 +31,7 @@ class HamiltonPathTest extends \PHPUnit_Framework_TestCase
         return [[['NYN', 'YNN', 'NNN'], 4],
             [['NYYY', 'YNNN', 'YNNN', 'YNNN'], 0],
             [['NYY', 'YNY', 'YYN'], 0],
-            [['NNNNNY', 'NNNNYN', 'NNNNYN', 'NNNNNN', 'NYYNNN', 'YNNNNN'], 24]];
+            [['NNNNNY', 'NNNNYN', 'NNNNYN', 'NNNNNN', 'NYYNNN', 'YNNNNN'], 24],
+            [["NYNY","YNYN","NYNY","YNYN"], 0]];
     }
 }
