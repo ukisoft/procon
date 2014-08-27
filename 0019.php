@@ -9,8 +9,7 @@ class HamiltonPath
         /*
          * 1つの都市から、3以上の必須経路が伸びていれば、return 0
          * ループが発生する場合も、return 0
-         * 2つ経路が伸びていれば、それを1つの都市として扱う
-         * 1つの経路の場合、そのまま
+         * 1〜2つ経路が伸びていれば、それを1つの都市として扱う
          *
          * 上記の場合の都市数の階乗を求める
          * 1つの都市として考えた場合、方向が2通りあるため、まとめた数だけ2をかける
@@ -50,18 +49,18 @@ class HamiltonPath
     {
         $loopPathNote = [];
         for ($i = 0; $i < count($parsedRoads); $i++) {
-            $loopPathNote[] = HamiltonPath::findForcedPath($parsedRoads, $i, $i);
+            $loopPathNote[] = HamiltonPath::findLoopPath($parsedRoads, $i, $i);
         }
         return in_array(true, $loopPathNote);
     }
 
-    static private function findForcedPath($parsedRoads, $startCheckPathNum, $currentCheckPathNum, $pastCheckPathNum = -1)
+    static private function findLoopPath($parsedRoads, $startCheckPathNum, $currentCheckPathNum, $pastCheckPathNum = -1)
     {
         foreach ($parsedRoads[$currentCheckPathNum] as $cityNum => $path) {
             if ($path == 'Y') {
                 if ($cityNum == $pastCheckPathNum) continue;
                 if ($pastCheckPathNum != -1 && $cityNum == $startCheckPathNum) return true;
-                if (HamiltonPath::findForcedPath($parsedRoads, $startCheckPathNum, $cityNum, $currentCheckPathNum)) return true;
+                if (HamiltonPath::findLoopPath($parsedRoads, $startCheckPathNum, $cityNum, $currentCheckPathNum)) return true;
             }
         }
         return false;
