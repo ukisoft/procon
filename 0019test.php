@@ -20,7 +20,7 @@ class HamiltonPathTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provider
      */
-    public function testLeastBorders($roads, $expected)
+    public function testCountPaths($roads, $expected)
     {
         $actual = $this->targetClass->countPaths($roads);
         $this->assertEquals($expected, $actual);
