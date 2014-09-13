@@ -2,7 +2,6 @@ procon
 ======
 
 ## AlgorithmChallenge
-
 - no.1 KiwiJuice
 - no.2 InterestingParty
 - no.3 Cryptography
@@ -23,16 +22,20 @@ procon
 - no.18 CirclesCountry
 - no.19 HamiltonPath
 
+## AlgorithmChallenge2
+- AntsWalingTimeCalculator
+
+## VipAlgorithm
+- no.1 Loop
+- no.2 FizzBuzz
 
 ## MyClass
-
 - MyVector
 - MyLinkedList
 - MyQueue
 - MyStack
 
 ## Sort
-
 - SelectionSort
 - QuickSort
 - HeapSort
