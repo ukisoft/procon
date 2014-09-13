@@ -28,6 +28,8 @@ procon
 ## VipAlgorithm
 - no.1 Loop
 - no.2 FizzBuzz
+- no.3 PrimeNumberChecker
+- http://vipprog.net/wiki/exercise.html#o8db2119
 
 ## MyClass
 - MyVector
