@@ -2,33 +2,34 @@ procon
 ======
 
 ## AlgorithmChallenge
-- no.1 KiwiJuice
-- no.2 InterestingParty
-- no.3 Cryptography
-- no.4 InterestingDigits
-- no.5 ThePalindrome
-- no.6 FriendScore
-- no.7 CrazyBot
-- no.8 MazeMaker
-- no.9 NumberMagicEasy
-- no.10 CorporationSalary
-- no.11 BadNeighbors
-- no.12 ChessMetric
-- no.13 HandShaking
-- no.14 ColorfulBoxesAndBalls
-- no.15 StockHistory
-- no.16 BatchSystem
-- no.17 AutoLoan
-- no.18 CirclesCountry
-- no.19 HamiltonPath
+1. KiwiJuice
+2. InterestingParty
+3. Cryptography
+4. InterestingDigits
+5. ThePalindrome
+6. FriendScore
+7. CrazyBot
+8. MazeMaker
+9. NumberMagicEasy
+10. CorporationSalary
+11. BadNeighbors
+12. ChessMetric
+13. HandShaking
+14. ColorfulBoxesAndBalls
+15. StockHistory
+16. BatchSystem
+17. AutoLoan
+18. CirclesCountry
+19. HamiltonPath
 
 ## AlgorithmChallenge2
 - AntsWalingTimeCalculator
 
 ## VipAlgorithm
-- no.1 Loop
-- no.2 FizzBuzz
-- no.3 PrimeNumberChecker
+1. Loop
+2. FizzBuzz
+3. PrimeNumberChecker
+4. SquareConverter
 - http://vipprog.net/wiki/exercise.html#o8db2119
 
 ## MyClass
