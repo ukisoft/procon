@@ -11,13 +11,16 @@ class PrimeNumberChecker {
 
     static public function check($target)
     {
-        if ($target <= 0) {
+        if ($target <= 1) {
             return false;
         }
-        if ($target === 1) {
+        if ($target === 2) {
             return true;
         }
-        for ($i = 2; $i < $target; $i++) {
+        if ($target % 2 === 0) {
+            return false;
+        }
+        for ($i = 3; $i < $target / 2; $i += 2) {
             if ($target % $i === 0) {
                 return false;
             }

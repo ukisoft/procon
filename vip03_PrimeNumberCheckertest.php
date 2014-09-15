@@ -29,6 +29,7 @@ class PrimeNumberCheckerTest extends \PHPUnit_Framework_TestCase {
     {
         return [[3, true],
                 [11, true],
-                [12, false]];
+                [12, false],
+                [10000000001, false]];
     }
 }
