@@ -41,8 +41,8 @@ class SquareConverter {
     {
         $currentNum = 9;
         while (true) {
-            $newNum = (double)((string)$previousNum . (string)$currentNum);
-            if ($num > $newNum * $newNum) {
+            $newNum = (string)$previousNum . (string)$currentNum;
+            if ($num > (double)$newNum * (double)$newNum) {
                 return $newNum;
             }
             $currentNum--;
