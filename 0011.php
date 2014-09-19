@@ -1,6 +1,6 @@
 <?php
 
-namespace Procon;
+namespace ProCon;
 
 class BadNeighbors
 {

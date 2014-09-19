@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 require_once('0004.php');
 
 class InterestingDigitsTest extends PHPUnit_Framework_TestCase {

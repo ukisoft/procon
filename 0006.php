@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class FriendScore {
 
     function highestScore($friends) {

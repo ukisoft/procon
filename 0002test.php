@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 require_once('0002.php');
 
 class InterestingPartyTest extends PHPUnit_Framework_TestCase {

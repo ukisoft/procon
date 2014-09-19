@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 require_once('0001.php');
 
 class KiwiJuiceEasyTest extends PHPUnit_Framework_TestCase {

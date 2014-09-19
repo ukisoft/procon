@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class ThePalindrome {
 
     function find($s) {

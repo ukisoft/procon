@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 require_once('0006.php');
 
 class FriendScoreTest extends PHPUnit_Framework_TestCase {

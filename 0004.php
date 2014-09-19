@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class InterestingDigits {
 
     public function digits($base) {

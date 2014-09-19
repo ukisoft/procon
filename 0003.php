@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class Cryptography {
 
     public function encrypt(array $numbers) {

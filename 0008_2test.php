@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 require_once('0008_2.php');
 
 class MazeMakerTest extends PHPUnit_Framework_TestCase {

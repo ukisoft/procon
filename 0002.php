@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class InterestingParty {
 
     public function bestInvitation(array $first, array $second) {

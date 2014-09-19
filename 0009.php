@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class NumberMagicEasy {
 
     public function theNumber($answer) {

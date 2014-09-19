@@ -1,6 +1,6 @@
 <?php
 
-namespace Procon;
+namespace ProCon;
 
 require_once('0015.php');
 

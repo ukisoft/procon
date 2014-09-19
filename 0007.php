@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class CrazyBot {
 
     private static $WAY_PROBABILITIES;

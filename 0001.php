@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 class KiwiJuiceEasy {
 
     function thePouring($capacities, $bottles, $fromId, $toId) {

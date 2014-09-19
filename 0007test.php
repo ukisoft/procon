@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 require_once('0007.php');
 
 class CrazyBotTest extends PHPUnit_Framework_TestCase {

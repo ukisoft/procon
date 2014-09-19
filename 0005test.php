@@ -1,5 +1,7 @@
 <?php
 
+namespace ProCon;
+
 require_once('0005.php');
 
 class ThePalindromeTest extends PHPUnit_Framework_TestCase {

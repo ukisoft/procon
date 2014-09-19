@@ -24,6 +24,7 @@ procon
 
 ## AlgorithmChallenge2
 - AntsWalingTimeCalculator
+- PartialSumCalculator
 
 ## VipAlgorithm
 1. Loop
