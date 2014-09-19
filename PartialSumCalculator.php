@@ -18,8 +18,7 @@ class PartialSumCalculator
             $cleanedPartialNumSubjects[] = $subjects[$i];
         }
 
-        array_reverse($cleanedPartialNumSubjects);
-        $result = PartialSumCalculator::calcPartialSum(0, $subjects, 0, $sumTarget);
+        $result = PartialSumCalculator::calcPartialSum(0, array_reverse($cleanedPartialNumSubjects), 0, $sumTarget);
         return $result === $sumTarget;
     }
 
@@ -40,9 +39,9 @@ class PartialSumCalculator
             return PartialSumCalculator::calcPartialSum($sum, $subjects, ++$next, $sumTarget);
         }
         if (count($subjects) <= $next + 1) {
-            return max(PartialSumCalculator::calcPartialSum($sum, $subjects, $next + 1, $sumTarget,
-                       PartialSumCalculator::calcPartialSum($newSum, $subjects, $next + 1, $sumTarget)));
+            return max($sum, $newSum);
         }
-        return max($sum, $newSum);
+        return max(PartialSumCalculator::calcPartialSum($sum, $subjects, $next + 1, $sumTarget),
+                   PartialSumCalculator::calcPartialSum($newSum, $subjects, $next + 1, $sumTarget));
     }
 }

@@ -9,7 +9,7 @@ class PartialSumCalculatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provider
      */
-    public function testGetWalkingTime($partialNumSubjects, $sumTarget, $expected)
+    public function testJudge($partialNumSubjects, $sumTarget, $expected)
     {
         $actual = PartialSumCalculator::judge($partialNumSubjects, $sumTarget);
         $this->assertEquals($expected, $actual);
