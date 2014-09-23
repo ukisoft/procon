@@ -18,11 +18,11 @@ class PartialSumCalculator
             $cleanedPartialNumSubjects[] = $subjects[$i];
         }
 
-        $result = PartialSumCalculator::calcPartialSum(0, array_reverse($cleanedPartialNumSubjects), 0, $sumTarget);
+        $result = PartialSumCalculator::findTheMostClosePartialSum(0, array_reverse($cleanedPartialNumSubjects), 0, $sumTarget);
         return $result === $sumTarget;
     }
 
-    static private function calcPartialSum($sum, $subjects, $next, $sumTarget)
+    static private function findTheMostClosePartialSum($sum, $subjects, $next, $sumTarget)
     {
         /*
          * コレまでの合計値と、次に加えるkeyを渡される
@@ -36,12 +36,12 @@ class PartialSumCalculator
             if (count($subjects) <= $next + 1) {
                 return $sum;
             }
-            return PartialSumCalculator::calcPartialSum($sum, $subjects, ++$next, $sumTarget);
+            return PartialSumCalculator::findTheMostClosePartialSum($sum, $subjects, ++$next, $sumTarget);
         }
         if (count($subjects) <= $next + 1) {
             return max($sum, $newSum);
         }
-        return max(PartialSumCalculator::calcPartialSum($sum, $subjects, $next + 1, $sumTarget),
-                   PartialSumCalculator::calcPartialSum($newSum, $subjects, $next + 1, $sumTarget));
+        return max(PartialSumCalculator::findTheMostClosePartialSum($sum, $subjects, $next + 1, $sumTarget),
+                   PartialSumCalculator::findTheMostClosePartialSum($newSum, $subjects, $next + 1, $sumTarget));
     }
 }
