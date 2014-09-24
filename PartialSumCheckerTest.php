@@ -2,16 +2,16 @@
 
 namespace ProCon;
 
-require_once('PartialSumCalculator.php');
+require_once('PartialSumChecker.php');
 
-class PartialSumCalculatorTest extends \PHPUnit_Framework_TestCase
+class PartialSumCheckerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider provider
      */
     public function testJudge($partialNumSubjects, $sumTarget, $expected)
     {
-        $actual = PartialSumCalculator::judge($partialNumSubjects, $sumTarget);
+        $actual = PartialSumChecker::check($partialNumSubjects, $sumTarget);
         $this->assertEquals($expected, $actual);
     }
 
