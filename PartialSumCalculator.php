@@ -18,7 +18,10 @@ class PartialSumCalculator
             $cleanedPartialNumSubjects[] = $subjects[$i];
         }
 
-        $result = PartialSumCalculator::findTheMostClosePartialSum(0, array_reverse($cleanedPartialNumSubjects), 0, $sumTarget);
+        $result = 0;
+        if (count($cleanedPartialNumSubjects) !== 0) {
+            $result = PartialSumCalculator::findTheMostClosePartialSum(0, array_reverse($cleanedPartialNumSubjects), 0, $sumTarget);
+        }
         return $result === $sumTarget;
     }
 
