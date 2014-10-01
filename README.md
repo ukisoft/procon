@@ -34,12 +34,12 @@ procon
 - http://vipprog.net/wiki/exercise.html#o8db2119
 
 ## MyClass
-- MyVector
-- MyLinkedList
-- MyQueue
-- MyStack
+1. MyVector
+2. MyLinkedList
+3. MyQueue
+4. MyStack
 
 ## Sort
-- SelectionSort
-- QuickSort
-- HeapSort
+1. SelectionSort
+2. QuickSort
+3. HeapSort
