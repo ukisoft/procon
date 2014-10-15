@@ -66,8 +66,12 @@ class LakeCounter
             [$x + 1, $y - 1], [$x + 1, $y], [$x + 1, $y + 1]];
 
         foreach ($checkArea as $checkPoint) {
+            if ($checkSheet[$checkPoint[0]][$checkPoint[1]] === LakeCounter::CHECK) {
+                continue;
+            }
             if ($area->isAvailable($checkPoint[0], $checkPoint[1]) && $area->isLake($checkPoint[0], $checkPoint[1])) {
                 $checkSheet[$checkPoint[0]][$checkPoint[1]] = LakeCounter::CHECK;
+                $checkSheet = LakeCounter::checkConnectedLakes($checkPoint[0], $checkPoint[1], $area, $checkSheet);
             }
         }
         return $checkSheet;
