@@ -8,8 +8,6 @@ class LakeCounterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider provider
-     * @param int $rowNum
-     * @param int $columnNum
      * @param array $lakes
      * @param int $expected
      */
