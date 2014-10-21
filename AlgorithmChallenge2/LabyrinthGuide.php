@@ -8,7 +8,7 @@ class LabyrinthGuide
     {
         $labyrinthMap = new LabyrinthMap($mapData);
         $stepStockQueue = new \SplQueue();
-        $stepStockQueue->enqueue($labyrinthMap->getStartPosition());
+        $stepStockQueue->enqueue($labyrinthMap->getStartStep());
         while (count($stepStockQueue) > 0) {
             $step = $stepStockQueue->dequeue();
             if ($labyrinthMap->isGoal($step)) {
@@ -17,7 +17,7 @@ class LabyrinthGuide
             if ($labyrinthMap->isWall($step) || $labyrinthMap->isAvailable($step) === false) {
                 continue;
             }
-            foreach ($step->createNextSteps() as $nextStep) {
+            foreach (StepFactory::createNextSteps($step) as $nextStep) {
                 $stepStockQueue->enqueue($nextStep);
             }
         }
@@ -34,14 +34,14 @@ class LabyrinthMap
             $parsedMapLine = str_split($mapLine);
             $this->map[] = $parsedMapLine;
             if ($this->start == [] && array_search('S', $parsedMapLine) != false) {
-                $this->start = new Step(array_search('S', $parsedMapLine), $key);
+                $this->start = StepFactory::createStartStep(array_search('S', $parsedMapLine), $key);
             }
         }
         $this->maxRow = count($this->map);
         $this->maxColumn = count($this->map[0]);
     }
 
-    public function getStartPosition()
+    public function getStartStep()
     {
         return $this->start;
     }
@@ -118,27 +118,6 @@ class Step
     {
         return $this->getX() === $step->getX() && $this->getY() === $step->getY();
     }
-
-    public function createNextSteps()
-    {
-        $nextSteps = [new Step($this->x - 1, $this->y, StepFrom::right, $this->count + 1),
-                      new Step($this->x + 1, $this->y, StepFrom::left, $this->count + 1),
-                      new Step($this->x, $this->y - 1, StepFrom::down, $this->count + 1),
-                      new Step($this->x, $this->y + 1, StepFrom::up, $this->count + 1)];
-        if ($this->from === StepFrom::up) {
-            unset($nextSteps[2]);
-        }
-        if ($this->from === StepFrom::down) {
-            unset($nextSteps[3]);
-        }
-        if ($this->from === StepFrom::right) {
-            unset($nextSteps[1]);
-        }
-        if ($this->from === StepFrom::left) {
-            unset($nextSteps[0]);
-        }
-        return $nextSteps;
-    }
 }
 
 class StepFrom// extends \SplEnum
@@ -149,4 +128,37 @@ class StepFrom// extends \SplEnum
     const right = 'right';
     const left = 'left';
     const neutral = 'neutral';
+}
+
+class StepFactory
+{
+    public static function createStartStep($x, $y)
+    {
+        return new Step($x, $y);
+    }
+
+    /**
+     * @param Step $step
+     * @return array
+     */
+    public static function createNextSteps($step)
+    {
+        $nextSteps = [new Step($step->getX() - 1, $step->getY(), StepFrom::right, $step->getCount() + 1),
+            new Step($step->getX() + 1, $step->getY(), StepFrom::left, $step->getCount() + 1),
+            new Step($step->getX(), $step->getY() - 1, StepFrom::down, $step->getCount() + 1),
+            new Step($step->getX(), $step->getY() + 1, StepFrom::up, $step->getCount() + 1)];
+        if ($step->getFrom() === StepFrom::up) {
+            unset($nextSteps[2]);
+        }
+        if ($step->getFrom() === StepFrom::down) {
+            unset($nextSteps[3]);
+        }
+        if ($step->getFrom() === StepFrom::right) {
+            unset($nextSteps[1]);
+        }
+        if ($step->getFrom() === StepFrom::left) {
+            unset($nextSteps[0]);
+        }
+        return $nextSteps;
+    }
 }
