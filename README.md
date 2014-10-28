@@ -27,6 +27,7 @@ procon
 - PartialSumChecker
 - LakeCounter
 - LabyrinthGuide
+- MinimumCoinCalculator
 
 ## VipAlgorithm
 1. Loop
