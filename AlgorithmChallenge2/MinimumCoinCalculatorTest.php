@@ -28,5 +28,4 @@ class MinimumCoinCalculatorTest extends \PHPUnit_Framework_TestCase
     {
         return [[3, 2, 1, 3, 0, 2, 620, 6]];
     }
-
 } 

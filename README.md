@@ -28,6 +28,7 @@ procon
 - LakeCounter
 - LabyrinthGuide
 - MinimumCoinCalculator
+- TaskScheduler
 
 ## VipAlgorithm
 1. Loop
