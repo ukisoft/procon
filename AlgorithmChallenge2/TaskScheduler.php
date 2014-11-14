@@ -12,12 +12,12 @@ class TaskScheduler
             // 残っている最小のstartTimesに対応したKeyを取得する。
             $nextTaskKey = 100001;
             $nextStartTime = 100000001;
-            array_map(function($key, $startTime) use (&$nextTaskKey, &$nextStartTime) {
+            foreach ($startTimes as $key => $startTime) {
                 if ($startTime < $nextStartTime) {
                     $nextTaskKey = $key;
                     $nextStartTime = $startTime;
                 }
-            }, array_keys($startTimes), $startTimes);
+            }
             // 対応する終了時間を退避。
             $lastEndTime = $endTimes[$nextTaskKey];
             $taskCount++;
