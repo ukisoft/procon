@@ -2,6 +2,8 @@
 
 namespace Vip;
 
+use ProCon\SquareConverterVer2;
+
 require_once('vip04_SquareConverterVer2.php');
 
 class SquareConverterTest extends \PHPUnit_Framework_TestCase {
@@ -10,19 +12,22 @@ class SquareConverterTest extends \PHPUnit_Framework_TestCase {
      * @var SquareConverterVer2
      */
     private $targetClass;
+    private $epsilon = 0.000011;
 
     public function setUp()
     {
-        $this->targetClass = new SquareConverter();
+        $this->targetClass = new SquareConverterVer2();
     }
 
     /**
      * @dataProvider provider
+     * @param $num
+     * @param $expected
      */
     public function testCountPaths($num, $expected)
     {
         $actual = $this->targetClass->get($num);
-        $this->assertEquals($expected, $actual);
+        $this->assertTrue(abs($expected - $actual) <= $this->epsilon);
     }
 
     public function provider()
