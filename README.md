@@ -29,6 +29,7 @@ procon
 - LabyrinthGuide
 - MinimumCoinCalculator
 - TaskScheduler
+- BestCowLiner
 
 ## VipAlgorithm
 1. Loop
