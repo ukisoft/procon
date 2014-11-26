@@ -4,9 +4,6 @@ namespace ProCon;
 
 class BestCowLiner
 {
-    static private $right = 'right';
-    static private $left = 'left';
-
     static public function get($inputString)
     {
         /*
@@ -24,11 +21,9 @@ class BestCowLiner
         $restWordNum = count($inputWords);
         $result = '';
         while ($restWordNum > 0) {
-            $judge = BestCowLiner::judgeHeadOrTail($inputWords);
-            if ($judge === BestCowLiner::$left) {
+            if (BestCowLiner::hasMoreAscendingOrderedHeadThanTail($inputWords)) {
                 $result .= array_shift($inputWords);
-            }
-            if ($judge === BestCowLiner::$right) {
+            } else {
                 $result .= array_pop($inputWords);
             }
             $restWordNum--;
@@ -36,21 +31,21 @@ class BestCowLiner
         return $result;
     }
 
-    static private function judgeHeadOrTail($words)
+    static private function hasMoreAscendingOrderedHeadThanTail($words)
     {
         $leftWordKey = 0;
         $rightWordKey = count($words) - 1;
         while ($leftWordKey <= $rightWordKey) {
             $stringJudge = strcasecmp($words[$leftWordKey], $words[$rightWordKey]);
             if ($stringJudge > 0) {
-                return BestCowLiner::$right;
+                return false;
             }
             if ($stringJudge < 0) {
-                return BestCowLiner::$left;
+                return true;
             }
             $leftWordKey++;
             $rightWordKey--;
         }
-        return BestCowLiner::$left;
+        return true;
     }
 }
