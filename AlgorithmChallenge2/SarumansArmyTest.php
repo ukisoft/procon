@@ -9,12 +9,12 @@ class SarumansArmyTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provider
      * @param $radius
-     * @param $points
+     * @param $positions
      * @param $expected
      */
-    public function testCalc($radius, $points, $expected)
+    public function testCalc($radius, $positions, $expected)
     {
-        $actual = SarumansArmy::calc($radius, $points);
+        $actual = SarumansArmy::calc($radius, $positions);
         $this->assertEquals($expected, $actual);
     }
 
