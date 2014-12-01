@@ -30,6 +30,7 @@ procon
 - MinimumCoinCalculator
 - TaskScheduler
 - BestCowLiner
+- Saruman's Army
 
 ## VipAlgorithm
 1. Loop
