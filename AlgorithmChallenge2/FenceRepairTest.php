@@ -8,12 +8,12 @@ class FenceRepairTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider provider
-     * @param $boards
+     * @param $boardsLength
      * @param $expected
      */
-    public function testCalc($boards, $expected)
+    public function testCalc($boardsLength, $expected)
     {
-        $actual = FenceRepair::calc($boards);
+        $actual = FenceRepair::calc($boardsLength);
         $this->assertEquals($expected, $actual);
     }
 
