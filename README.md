@@ -31,6 +31,7 @@ procon
 - TaskScheduler
 - BestCowLiner
 - Saruman's Army
+- FenceRepair
 
 ## VipAlgorithm
 1. Loop

@@ -22,4 +22,4 @@ class SarumansArmyTest extends \PHPUnit_Framework_TestCase
     {
         return [[10, [1, 7, 15, 20, 30, 50], 3]];
     }
-} 
+}
