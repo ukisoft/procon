@@ -40,6 +40,7 @@ procon
 3. PrimeNumberChecker
 4. SquareConverter
 5. LeapYear
+6. TowerOfHanoi
 
 ## MyClass
 1. MyVector
