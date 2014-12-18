@@ -2,7 +2,7 @@
 
 namespace Vip;
 
-require_once('vip02_FizzBuzz.php');
+require_once('FizzBuzz.php');
 
 class FizzBuzzTest extends \PHPUnit_Framework_TestCase {
 

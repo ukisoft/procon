@@ -2,7 +2,7 @@
 
 namespace Vip;
 
-require_once('vip01_Loop.php');
+require_once('Loop.php');
 
 class LoopTest extends \PHPUnit_Framework_TestCase{
 

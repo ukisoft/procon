@@ -2,7 +2,7 @@
 
 namespace Vip;
 
-require_once('vip04_SquareConverter.php');
+require_once('SquareConverter.php');
 
 class SquareConverterTest extends \PHPUnit_Framework_TestCase {
 

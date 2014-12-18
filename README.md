@@ -23,22 +23,23 @@ procon
 19. HamiltonPath
 
 ## AlgorithmChallenge2
-- AntsWalingTimeCalculator
-- PartialSumChecker
-- LakeCounter
-- LabyrinthGuide
-- MinimumCoinCalculator
-- TaskScheduler
-- BestCowLiner
-- Saruman's Army
-- FenceRepair
+1. AntsWalingTimeCalculator
+2. PartialSumChecker
+3. LakeCounter
+4. LabyrinthGuide
+5. MinimumCoinCalculator
+6. TaskScheduler
+7. BestCowLiner
+8. Saruman's Army
+9. FenceRepair
 
 ## VipAlgorithm
+- http://vipprog.net/wiki/exercise.html
 1. Loop
 2. FizzBuzz
 3. PrimeNumberChecker
 4. SquareConverter
-- http://vipprog.net/wiki/exercise.html#o8db2119
+5. LeapYear
 
 ## MyClass
 1. MyVector

@@ -2,7 +2,7 @@
 
 namespace Vip;
 
-require_once('vip03_PrimeNumberChecker.php');
+require_once('PrimeNumberChecker.php');
 
 class PrimeNumberCheckerTest extends \PHPUnit_Framework_TestCase {
 

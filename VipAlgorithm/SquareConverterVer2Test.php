@@ -4,7 +4,7 @@ namespace Vip;
 
 use ProCon\SquareConverterVer2;
 
-require_once('vip04_SquareConverterVer2.php');
+require_once('SquareConverterVer2.php');
 
 class SquareConverterTest extends \PHPUnit_Framework_TestCase {
 
