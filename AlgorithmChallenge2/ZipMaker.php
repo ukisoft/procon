@@ -21,7 +21,7 @@ if ($contents === false) {
 }
 
 $fileNameSet = explode('.', $argv[1]);
-if (count($fileNameSet) <= 1 || $fileNameSet[1] !== 'pzip') {
+if (isForZip($fileNameSet)) {
     /*
      * 圧縮
      * 文字をカウントする
@@ -31,16 +31,21 @@ if (count($fileNameSet) <= 1 || $fileNameSet[1] !== 'pzip') {
      * 最小バイト数の数字に変換する
      * 辞書との間に;を挟んで、結合してファイルに書き出す
      */
-    if (preg_match('/^[a-zA-Z0-9\s]+$/', $contents) !== 1) {
+    if (hasUnreadableWords($contents)) {
         echo '圧縮するファイルには、半角英数スペースのみ記載することができます。';
         return;
     }
     $counter = [];
     foreach (str_split($contents) as $content) {
         if (array_key_exists(ord($content), $counter)) {
-
+            $counter[ord($content)] += 1;
+            continue;
         }
+        $counter[ord($content)] = 1;
     }
+
+
+
     return;
 }
 
@@ -50,3 +55,14 @@ if (count($fileNameSet) <= 1 || $fileNameSet[1] !== 'pzip') {
  * ファイルに書き出して終了
  * ファイル名は、拡張子をtxtに変換したもの
  */
+
+
+function isForZip($fileNameSet)
+{
+    return count($fileNameSet) <= 1 || $fileNameSet[1] !== 'pzip';
+}
+
+function hasUnreadableWords($contents)
+{
+    return preg_match('/^[a-zA-Z0-9\s]+$/', $contents) !== 1;
+}
