@@ -31,15 +31,14 @@ if (count($fileNameSet) <= 1 || $fileNameSet[1] !== 'pzip') {
      * 最小バイト数の数字に変換する
      * 辞書との間に;を挟んで、結合してファイルに書き出す
      */
-    echo $contents;
-    if (preg_match('/^[a-zA-Z0-9\s]+$/', $contents) === false) {
+    if (preg_match('/^[a-zA-Z0-9\s]+$/', $contents) !== 1) {
         echo '圧縮するファイルには、半角英数スペースのみ記載することができます。';
         return;
     }
     $counter = [];
     foreach (str_split($contents) as $content) {
         if (array_key_exists(ord($content), $counter)) {
-            
+
         }
     }
     return;
