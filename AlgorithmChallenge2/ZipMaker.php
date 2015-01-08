@@ -8,6 +8,10 @@
  * pzipだったら解答、それ以外だったら圧縮する
  */
 
+const EXTENSION = 'pzip';
+const KEY_FOR_DICT = 'd';
+const KEY_FOR_BODY = 'b';
+
 if (count($argv) <= 1) {
     echo '引数として、ファイル名を指定してください。';
     return;
@@ -35,29 +39,12 @@ if (isForPzip($fileNameSet)) {
         echo '圧縮するファイルには、半角英数スペースのみ記載することができます。';
         return;
     }
-    $counter = [];
-    foreach (str_split($contents) as $content) {
-        if (array_key_exists($content, $counter)) {
-            $counter[$content] += 1;
-            continue;
-        }
-        $counter[$content] = 1;
-    }
+    $dictionary = getDictionary($contents);
+    $translatedContents = translate($contents, $dictionary);
 
-    arsort($counter);
-    $dictionary = [];
-    $translatedKey = '1';
-    foreach ($counter as $key => $value) {
-        $dictionary[$key] = $translatedKey;
-        $translatedKey = '0' . $translatedKey;
-    }
-
-    $translatedContents = '';
-    foreach (str_split($contents) as $content) {
-        $translatedContents .= $dictionary[$content];
-    }
-
-    file_put_contents($fileNameSet[0] . ".pzip", serialize(['dict' => $dictionary, 'body' => $translatedContents]));
+    file_put_contents($fileNameSet[0] . "." . EXTENSION,
+        serialize([KEY_FOR_DICT => $dictionary, KEY_FOR_BODY => $translatedContents]));
+    echo '圧縮が完了しました。';
     return;
 }
 
@@ -68,13 +55,78 @@ if (isForPzip($fileNameSet)) {
  * ファイル名は、拡張子をtxtに変換したもの
  */
 
+$body = reverse($contents);
+file_put_contents($fileNameSet[0] . '.txt', $body);
+echo '解凍が完了しました。';
 
 function isForPzip($fileNameSet)
 {
-    return count($fileNameSet) <= 1 || $fileNameSet[1] !== 'pzip';
+    return count($fileNameSet) <= 1 || $fileNameSet[1] !== EXTENSION;
 }
 
 function hasUnreadableWords($contents)
 {
     return preg_match('/^[a-zA-Z0-9\s]+$/', $contents) !== 1;
+}
+
+function getWordCount($contents)
+{
+    $wordCount = [];
+    foreach (str_split($contents) as $content) {
+        if (array_key_exists($content, $wordCount)) {
+            $wordCount[$content] += 1;
+            continue;
+        }
+        $wordCount[$content] = 1;
+    }
+    arsort($wordCount);
+    return $wordCount;
+}
+
+function getDictionary($contents)
+{
+    $wordCount = getWordCount($contents);
+    $dictionary = [];
+    $translatedKey = '1';
+    foreach ($wordCount as $key => $value) {
+        $dictionary[$key] = $translatedKey;
+        $translatedKey = '0' . $translatedKey;
+    }
+    return $dictionary;
+}
+
+function translate($contents, $dictionary)
+{
+    $translatedContents = '';
+    foreach (str_split($contents) as $content) {
+        $translatedContents .= $dictionary[$content];
+    }
+    return $translatedContents;
+}
+
+function findKey($array, $target)
+{
+    foreach ($array as $key => $value) {
+        if ($value === $target) {
+            return $key;
+        }
+    }
+    return null;
+}
+
+function reverse($contents)
+{
+    $unserializedContents = unserialize($contents);
+    $translatedBody = explode('1', $unserializedContents[KEY_FOR_BODY]);
+    $dictionary = $unserializedContents[KEY_FOR_DICT];
+    return getBody($translatedBody, $dictionary);
+}
+
+function getBody($translatedBody, $dictionary)
+{
+    $body = '';
+    foreach ($translatedBody as $word) {
+        $body .= findKey($dictionary, $word . '1');
+    }
+    return $body;
 }
