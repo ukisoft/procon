@@ -21,15 +21,15 @@ if ($contents === false) {
 }
 
 $fileNameSet = explode('.', $argv[1]);
-if (isForZip($fileNameSet)) {
+if (isForPzip($fileNameSet)) {
     /*
      * 圧縮
-     * 文字をカウントする
-     * Asciiに変換する
-     * 変換できなければエラーで終了
-     * 変換できたら、FenceRepairのアルゴリズムを使って、最小バイト数になるように辞書を作る
-     * 最小バイト数の数字に変換する
-     * 辞書との間に;を挟んで、結合してファイルに書き出す
+     * 文字チェック
+     * 変換できたら、文字数をカウント
+     * 数の大きい順に、0, 00, 000...と割り振るような辞書を作る
+     * 1は区切り
+     * 辞書を元に変換する
+     * シリアライズしてファイルに書き出す
      */
     if (hasUnreadableWords($contents)) {
         echo '圧縮するファイルには、半角英数スペースのみ記載することができます。';
@@ -37,27 +37,39 @@ if (isForZip($fileNameSet)) {
     }
     $counter = [];
     foreach (str_split($contents) as $content) {
-        if (array_key_exists(ord($content), $counter)) {
-            $counter[ord($content)] += 1;
+        if (array_key_exists($content, $counter)) {
+            $counter[$content] += 1;
             continue;
         }
-        $counter[ord($content)] = 1;
+        $counter[$content] = 1;
     }
 
+    arsort($counter);
+    $dictionary = [];
+    $translatedKey = '1';
+    foreach ($counter as $key => $value) {
+        $dictionary[$key] = $translatedKey;
+        $translatedKey = '0' . $translatedKey;
+    }
 
+    $translatedContents = '';
+    foreach (str_split($contents) as $content) {
+        $translatedContents .= $dictionary[$content];
+    }
 
+    file_put_contents($fileNameSet[0] . ".pzip", serialize(['dict' => $dictionary, 'body' => $translatedContents]));
     return;
 }
 
 /*
- * 辞書と本文を;で分割する
- * 辞書と照らしあわせて本文を復元する
+ * アンシリアライズで復元する
+ * 辞書から本文を復元する
  * ファイルに書き出して終了
  * ファイル名は、拡張子をtxtに変換したもの
  */
 
 
-function isForZip($fileNameSet)
+function isForPzip($fileNameSet)
 {
     return count($fileNameSet) <= 1 || $fileNameSet[1] !== 'pzip';
 }
