@@ -159,14 +159,20 @@ function reverse($contents)
     $unserializedContents = unserialize($contents);
     $dictionary = $unserializedContents[KEY_FOR_DICT];
     $translatedBody = $unserializedContents[KEY_FOR_BODY];
-    return getBody($translatedBody, $dictionary);
+    return getBody($translatedBody, array_flip($dictionary));
 }
 
 function getBody($translatedBody, $dictionary)
 {
     $body = '';
-    foreach ($translatedBody as $word) {
-        $body .= findKey($dictionary, $word . '1');
+    $translatedWord = '';
+    foreach (str_split($translatedBody) as $num) {
+        $translatedWord .= $num;
+        if (array_key_exists($translatedWord, $dictionary)) {
+            $body .= $dictionary[$translatedWord];
+            $translatedWord = '';
+            continue;
+        }
     }
     return $body;
 }
