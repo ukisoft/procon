@@ -198,8 +198,7 @@ class Node {
             $dictionary[$this->word] = $selfNum;
             return $dictionary;
         }
-        return $dictionary
-            + $this->left->getDictionary($dictionary, $selfNum)
+        return $this->left->getDictionary($dictionary, $selfNum)
             + $this->right->getDictionary($dictionary, $selfNum);
     }
 }
