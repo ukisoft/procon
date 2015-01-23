@@ -191,14 +191,13 @@ class Node {
         return is_null($this->word) === false;
     }
 
-    public function getDictionary($dictionary = [], $parentNum = '')
+    public function getDictionary($parentNum = '')
     {
         $selfNum = $parentNum . (string)$this->num;
         if ($this->isEnd()) {
-            $dictionary[$this->word] = $selfNum;
-            return $dictionary;
+            return [$this->word => $selfNum];
         }
-        return $this->left->getDictionary($dictionary, $selfNum)
-            + $this->right->getDictionary($dictionary, $selfNum);
+        return $this->left->getDictionary($selfNum)
+            + $this->right->getDictionary($selfNum);
     }
 }
