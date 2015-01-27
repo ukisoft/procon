@@ -12,9 +12,9 @@ class KnapsackTest extends \PHPUnit_Framework_TestCase
      * @param $knapsack
      * @param $expected
      */
-    public function testCalcWithDp($items, $knapsack, $expected)
+    public function testCalc($items, $knapsack, $expected)
     {
-        $actual = Knapsack::calcWithDp($items, $knapsack);
+        $actual = Knapsack::calc($items, $knapsack);
         $this->assertEquals($expected, $actual);
     }
 

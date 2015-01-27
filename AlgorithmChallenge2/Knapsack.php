@@ -4,7 +4,7 @@ namespace ProCon;
 
 class Knapsack
 {
-    public static function calcWithDp($items, $knapsack)
+    public static function calc($items, $knapsack)
     {
         $items = array_map(function($weight) {
             return new Item($weight[0], $weight[1]);
@@ -21,11 +21,11 @@ class Knapsack
          * 全てのループが終わった後のnoteの、最も大きい値が答え
          */
         $note = [(int)$knapsack => 0];
-        Knapsack::addWithDp($items, (int)$knapsack, $note);
+        Knapsack::add($items, (int)$knapsack, $note);
         return max($note);
     }
 
-    private static function addWithDp($items, $knapsackSpace, &$note)
+    private static function add($items, $knapsackSpace, &$note)
     {
         while (count($items) > 0) {
             $item = array_pop($items);
@@ -35,11 +35,11 @@ class Knapsack
             $newKnapsackSpace = $knapsackSpace - $item->weight;
             if (array_key_exists($newKnapsackSpace, $note)) {
                 $note[$newKnapsackSpace] = max($note[$knapsackSpace] + $item->value, $note[$newKnapsackSpace]);
-                Knapsack::addWithDp($items, $newKnapsackSpace, $note);
+                Knapsack::add($items, $newKnapsackSpace, $note);
                 continue;
             }
             $note[$newKnapsackSpace] = $note[$knapsackSpace] + $item->value;
-            Knapsack::addWithDp($items, $newKnapsackSpace, $note);
+            Knapsack::add($items, $newKnapsackSpace, $note);
         }
     }
 }
