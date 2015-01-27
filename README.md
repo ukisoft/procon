@@ -33,6 +33,7 @@ procon
 8. Saruman's Army
 9. FenceRepair
 10. ZipMaker
+11. Knapsack
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
