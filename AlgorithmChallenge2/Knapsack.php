@@ -6,8 +6,14 @@ class Knapsack
 {
     public static function calc($items, $knapsack)
     {
-        $items = array_map(function($weight) {
-            return new Item($weight[0], $weight[1]);
+        $sortKey = [];
+        foreach ($items as $item) {
+            $sortKey[] = $item[0];
+        }
+        array_multisort($items, $sortKey, SORT_NUMERIC);
+
+        $items = array_map(function($item) {
+            return new Item($item[0], $item[1]);
         }, $items);
 
         /*
@@ -28,9 +34,9 @@ class Knapsack
     private static function add($items, $knapsackSpace, &$note)
     {
         while (count($items) > 0) {
-            $item = array_pop($items);
+            $item = array_shift($items);
             if ($knapsackSpace < $item->weight) {
-                continue;
+                break;
             }
             $newKnapsackSpace = $knapsackSpace - $item->weight;
             if (array_key_exists($newKnapsackSpace, $note)) {
