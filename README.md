@@ -34,6 +34,7 @@ procon
 9. FenceRepair
 10. ZipMaker
 11. Knapsack
+12. LongSamePartSet
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
