@@ -24,35 +24,20 @@ class LongSamePartSet
          * firstWordsの先頭まで到達した時の文字列の長さが一番大きいものが答え
          */
 
-        $nodes = [];
+        $maxLengths = [];
         for ($i = mb_strlen($firstWords) - 1; $i >= 0; $i--) {
             for ($j = mb_strlen($secondWords) - 1; $j >= 0; $j--) {
                 if ($firstWords[$i] === $secondWords[$j]) {
                     $length = 0;
-                    foreach ($nodes as $node) {
-                        if ($node->index > $j && $node->length > $length) {
-                            $length = $node->length;
+                    foreach ($maxLengths as $index => $maxLength) {
+                        if ($index > $j && $maxLength > $length) {
+                            $length = $maxLength;
                         }
                     }
-                    $nodes[] = new Node($j, $length + 1);
+                    $maxLengths[$j] = $length + 1;
                 }
             }
         }
-        $result = 0;
-        foreach  ($nodes as $node) {
-            if ($result < $node->length) {
-                $result = $node->length;
-            }
-        }
-        return $result;
-    }
-}
-
-class Node
-{
-    public function __construct($index, $length)
-    {
-        $this->index = $index;
-        $this->length = $length;
+        return count($maxLengths) === 0 ? 0 : max($maxLengths);
     }
 }
