@@ -30,8 +30,8 @@ class LongSamePartSet
                 if ($firstWords[$i] === $secondWords[$j]) {
                     $length = 0;
                     foreach ($nodes as $node) {
-                        if ($node->getIndex() > $j && $node->getLength() > $length) {
-                            $length = $node->getLength();
+                        if ($node->index > $j && $node->length > $length) {
+                            $length = $node->length;
                         }
                     }
                     $nodes[] = new Node($j, $length + 1);
@@ -40,8 +40,8 @@ class LongSamePartSet
         }
         $result = 0;
         foreach  ($nodes as $node) {
-            if ($result < $node->getLength()) {
-                $result = $node->getLength();
+            if ($result < $node->length) {
+                $result = $node->length;
             }
         }
         return $result;
@@ -54,15 +54,5 @@ class Node
     {
         $this->index = $index;
         $this->length = $length;
-    }
-
-    public function getIndex()
-    {
-        return $this->index;
-    }
-
-    public function getLength()
-    {
-        return $this->length;
     }
 }
