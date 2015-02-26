@@ -26,19 +26,19 @@ class LongSamePartSet
 
         $maxLengths = [];
         for ($i = mb_strlen($firstWords) - 1; $i >= 0; $i--) {
+            $selfLengths = [];
             for ($j = mb_strlen($secondWords) - 1; $j >= 0; $j--) {
-                $selfIndexes = [];
                 if ($firstWords[$i] === $secondWords[$j]) {
                     $length = 0;
-                    $selfIndexes[] = $j;
                     foreach ($maxLengths as $index => $maxLength) {
-                        if ($index > $j && in_array($index, $selfIndexes) === false && $maxLength > $length) {
+                        if ($j < $index && $length < $maxLength) {
                             $length = $maxLength;
                         }
                     }
-                    $maxLengths[$j] = $length + 1;
+                    $selfLengths[$j] = $length + 1;
                 }
             }
+            $maxLengths = $selfLengths + $maxLengths;
         }
         return count($maxLengths) === 0 ? 0 : max($maxLengths);
     }
