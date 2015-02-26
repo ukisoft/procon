@@ -20,6 +20,6 @@ class LongSamePartSetTest extends \PHPUnit_Framework_TestCase
 
     public function provider()
     {
-        return [['abcd', 'becd', 3]];
+        return [['abcd', 'becd', 3], ['ABCBDAB', 'BDCABA', 4]];
     }
 }
