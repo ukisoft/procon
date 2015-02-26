@@ -27,10 +27,12 @@ class LongSamePartSet
         $maxLengths = [];
         for ($i = mb_strlen($firstWords) - 1; $i >= 0; $i--) {
             for ($j = mb_strlen($secondWords) - 1; $j >= 0; $j--) {
+                $selfIndexes = [];
                 if ($firstWords[$i] === $secondWords[$j]) {
                     $length = 0;
+                    $selfIndexes[] = $j;
                     foreach ($maxLengths as $index => $maxLength) {
-                        if ($index > $j && $maxLength > $length) {
+                        if ($index > $j && in_array($index, $selfIndexes) === false && $maxLength > $length) {
                             $length = $maxLength;
                         }
                     }
