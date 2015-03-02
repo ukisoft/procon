@@ -4,7 +4,7 @@ namespace ProCon;
 
 class LongSamePartSet
 {
-    public function calc($firstWords, $secondWords)
+    public static function calc($firstWords, $secondWords)
     {
         /*
          * 全探索だと

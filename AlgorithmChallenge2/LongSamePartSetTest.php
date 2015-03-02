@@ -23,6 +23,7 @@ class LongSamePartSetTest extends \PHPUnit_Framework_TestCase
         return [['abcd', 'becd', 3],
             ['ABCBDAB', 'BDCABA', 4],
             ['a', 'aba', 1],
-            ['aa', 'aa', 2]];
+            ['aa', 'aa', 2],
+            [str_repeat('a', 1000), str_repeat('a', 1000), 1000]];
     }
 }
