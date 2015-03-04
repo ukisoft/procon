@@ -43,3 +43,9 @@ class LongSamePartSet
         return count($maxLengths) === 0 ? 0 : max($maxLengths);
     }
 }
+
+/* TODO
+ * 計算量でいうと、今 O(NM^2) かかってますが、ちょっと工夫すると O(NM) にできます。
+ * for が3つネストしてるけど2つにできる、ということ。
+ * jのループのたびにmaxLengthsをなめて計算してるけど、もう少し効率化できないか考えてみましょう。
+ */

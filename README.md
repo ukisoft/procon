@@ -35,6 +35,7 @@ procon
 10. ZipMaker
 11. Knapsack
 12. LongSamePartSet
+14. NoLimitKnapsack
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html

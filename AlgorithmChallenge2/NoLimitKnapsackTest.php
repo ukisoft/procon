@@ -1,0 +1,25 @@
+<?php
+
+namespace ProCon;
+
+require_once('NoLimitKnapsack.php');
+
+class NoLimitKnapsackTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @dataProvider provider
+     * @param $items
+     * @param $knapsack
+     * @param $expected
+     */
+    public function testCalc($items, $knapsack, $expected)
+    {
+        $actual = NoLimitKnapsack::calc($items, $knapsack);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function provider()
+    {
+        return [[[[3, 4], [4, 5], [2, 3]], 7, 10]];
+    }
+}
