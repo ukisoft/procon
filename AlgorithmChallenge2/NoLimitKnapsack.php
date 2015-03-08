@@ -8,39 +8,32 @@ class NoLimitKnapsack
 {
     public static function calc($items, $knapsack)
     {
-        /**
-         * Knapsack問題で、毎回使った荷物を削除してたけど、それをしないようにすれば良いだけなのでは・・
+        /*
+         * $noteに、itemの数だけ0を入れる
+         * ナップサックの容量だけループを回す
+         * 現在の容量に、itemを入れた時を計算し、$noteにあるその時の容量と比較し、大きければ更新する
+         * 入らなくなれば終了
+         * 全てのitemをチェックしたら、$noteにある最大の数が答え
          */
-
-        $sortKey = [];
-        foreach ($items as $item) {
-            $sortKey[] = $item[0];
-        }
-        array_multisort($items, $sortKey, SORT_NUMERIC);
 
         $items = array_map(function($item) {
             return new Item($item[0], $item[1]);
         }, $items);
 
-        $note = [(int)$knapsack => 0];
-        NoLimitKnapsack::add($items, (int)$knapsack, $note);
-        return max($note);
-    }
-
-    private static function add($items, $knapsackSpace, &$note)
-    {
+        $note = [];
         foreach ($items as $item) {
-            if ($knapsackSpace < $item->weight) {
-                break;
+            for ($i = $knapsack; $i > 0; $i--) {
+                $nextKnapsack = $i - $item->weight;
+                if ($nextKnapsack < 0) {
+                    continue 2;
+                }
+                if (in_array($nextKnapsack, $note) === false) {
+                    $note[$nextKnapsack] = $note[$i] + $item->value;
+                    continue;
+                }
+                $note[$nextKnapsack] = max($note[$i] + $item->value, $note[$nextKnapsack]);
             }
-            $newKnapsackSpace = $knapsackSpace - $item->weight;
-            if (array_key_exists($newKnapsackSpace, $note)) {
-                $note[$newKnapsackSpace] = max($note[$knapsackSpace] + $item->value, $note[$newKnapsackSpace]);
-                NoLimitKnapsack::add($items, $newKnapsackSpace, $note);
-                continue;
-            }
-            $note[$newKnapsackSpace] = $note[$knapsackSpace] + $item->value;
-            NoLimitKnapsack::add($items, $newKnapsackSpace, $note);
         }
+        return max($note);
     }
 }
