@@ -3,6 +3,7 @@
 namespace ProCon;
 
 require_once('LongestCommonSubsequence.php');
+require_once('LongestCommonSubsequence2.php');
 
 class LongestCommonSubsequenceTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,6 +16,18 @@ class LongestCommonSubsequenceTest extends \PHPUnit_Framework_TestCase
     public function testCalc($firstWords, $secondWords, $expected)
     {
         $actual = LongestCommonSubsequence::calc($firstWords, $secondWords);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @dataProvider provider
+     * @param $firstWords
+     * @param $secondWords
+     * @param $expected
+     */
+    public function testCalc2($firstWords, $secondWords, $expected)
+    {
+        $actual = LongestCommonSubsequence2::calc($firstWords, $secondWords);
         $this->assertEquals($expected, $actual);
     }
 
