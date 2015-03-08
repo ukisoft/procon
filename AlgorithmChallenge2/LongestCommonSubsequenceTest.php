@@ -2,9 +2,9 @@
 
 namespace ProCon;
 
-require_once('LongSamePartSet.php');
+require_once('LongestCommonSubsequence.php');
 
-class LongSamePartSetTest extends \PHPUnit_Framework_TestCase
+class LongestCommonSubsequenceTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider provider
@@ -14,7 +14,7 @@ class LongSamePartSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testCalc($firstWords, $secondWords, $expected)
     {
-        $actual = LongSamePartSet::calc($firstWords, $secondWords);
+        $actual = LongestCommonSubsequence::calc($firstWords, $secondWords);
         $this->assertEquals($expected, $actual);
     }
 
@@ -22,6 +22,7 @@ class LongSamePartSetTest extends \PHPUnit_Framework_TestCase
     {
         return [['abcd', 'becd', 3],
             ['ABCBDAB', 'BDCABA', 4],
+            ['ABCBDAB', 'BDCABAA', 4],
             ['a', 'aba', 1],
             ['aa', 'aa', 2],
             [str_repeat('a', 1000), str_repeat('a', 1000), 1000]];
