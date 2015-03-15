@@ -20,6 +20,7 @@ class NoLimitKnapsackTest extends \PHPUnit_Framework_TestCase
 
     public function provider()
     {
-        return [[[[3, 4], [4, 5], [2, 3]], 7, 10]];
+        return [[[[3, 4], [4, 5], [2, 3]], 7, 10],
+            [[[2, 11], [4, 10], [6, 20]], 7, 33]];
     }
 }

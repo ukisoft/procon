@@ -7,11 +7,17 @@ class LongestCommonSubsequence
     public static function calc($firstWords, $secondWords)
     {
         $maxLengths = [];
-        for ($i = mb_strlen($firstWords) - 1; $i >= 0; $i--) {
+        for ($i = 0; $i < mb_strlen($firstWords); $i++) {
             $selfLengths = [];
-            $maxLength = count($maxLengths) === 0 ? 0 : $maxLengths[min(array_keys($maxLengths))];
-            for ($j = mb_strlen($secondWords) - 1; $j >= 0; $j--) {
+            for ($j = 0; $j < mb_strlen($secondWords); $j++) {
                 if ($firstWords[$i] === $secondWords[$j]) {
+                    $maxLength = 0;
+                    for ($k = $j - 1; $k >= 0; $k--) {
+                        if (is_null($maxLengths[$k]) === false) {
+                            $maxLength = $maxLengths[$k];
+                            break;
+                        }
+                    }
                     $selfLengths[$j] = $maxLength + 1;
                 }
             }
