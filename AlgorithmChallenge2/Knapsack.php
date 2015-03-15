@@ -26,7 +26,7 @@ class Knapsack
                 if ($nextKnapsackSpace < 0) {
                     continue;
                 }
-                if (in_array($nextKnapsackSpace, $note)) {
+                if (array_key_exists($nextKnapsackSpace, $note)) {
                     $nextNote[$nextKnapsackSpace] = max($value + $item->value, $note[$nextKnapsackSpace]);
                     continue;
                 }

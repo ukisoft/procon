@@ -27,7 +27,7 @@ class NoLimitKnapsack
                 if ($nextKnapsack < 0) {
                     continue 2;
                 }
-                if (in_array($nextKnapsack, $note) === false) {
+                if (array_key_exists($nextKnapsack, $note) === false) {
                     $note[$nextKnapsack] = $note[$i] + $item->value;
                     continue;
                 }
