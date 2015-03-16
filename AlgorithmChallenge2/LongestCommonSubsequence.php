@@ -10,23 +10,16 @@ class LongestCommonSubsequence
         for ($i = 0; $i < mb_strlen($firstWords); $i++) {
             $selfLengths = [];
             for ($j = 0; $j < mb_strlen($secondWords); $j++) {
+                $maxLength = 0;
                 if ($firstWords[$i] === $secondWords[$j]) {
-                    $maxLength = 0;
-                    for ($k = $j - 1; $k >= 0; $k--) {
-                        if (is_null($maxLengths[$k]) === false) {
-                            $maxLength = $maxLengths[$k];
-                            break;
-                        }
+                    if ($j - 1 >= 0) {
+                        $maxLength = $maxLengths[$j - 1];
                     }
                     $selfLengths[$j] = $maxLength + 1;
                     continue;
                 }
-                $maxLength = 0;
-                for ($k = $j - 1; $k >= 0; $k--) {
-                    if (is_null($selfLengths[$k]) === false) {
-                        $maxLength = $selfLengths[$k];
-                        break;
-                    }
+                if ($j - 1 >= 0) {
+                    $maxLength = $selfLengths[$j - 1];
                 }
                 $selfLengths[$j] = $maxLength;
             }
