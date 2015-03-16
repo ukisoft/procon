@@ -19,7 +19,16 @@ class LongestCommonSubsequence
                         }
                     }
                     $selfLengths[$j] = $maxLength + 1;
+                    continue;
                 }
+                $maxLength = 0;
+                for ($k = $j - 1; $k >= 0; $k--) {
+                    if (is_null($selfLengths[$k]) === false) {
+                        $maxLength = $selfLengths[$k];
+                        break;
+                    }
+                }
+                $selfLengths[$j] = $maxLength;
             }
             $maxLengths = $selfLengths + $maxLengths;
         }
