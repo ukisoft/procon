@@ -40,6 +40,7 @@ class LongestCommonSubsequenceTest extends \PHPUnit_Framework_TestCase
             ['aa', 'aa', 2],
             [str_repeat('a', 1000), str_repeat('a', 1000), 1000],
             ['aaaacaa', 'aacaaac', 5],
-            ['baad', 'aabd', 3]];
+            ['baad', 'aabd', 3],
+            ["bbacd", "bbxcd", 4]];
     }
 }
