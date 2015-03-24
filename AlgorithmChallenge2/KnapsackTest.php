@@ -3,6 +3,7 @@
 namespace ProCon;
 
 require_once('Knapsack.php');
+require_once('KnapsackMemoVer.php');
 
 class KnapsackTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,6 +16,18 @@ class KnapsackTest extends \PHPUnit_Framework_TestCase
     public function testCalc($items, $knapsack, $expected)
     {
         $actual = Knapsack::calc($items, $knapsack);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @dataProvider provider
+     * @param $items
+     * @param $knapsack
+     * @param $expected
+     */
+    public function testCalcMemoVer($items, $knapsack, $expected)
+    {
+        $actual = KnapsackMemoVer::calc($items, $knapsack);
         $this->assertEquals($expected, $actual);
     }
 
