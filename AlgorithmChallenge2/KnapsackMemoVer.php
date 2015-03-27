@@ -23,12 +23,13 @@ class KnapsackMemoVer
         if ($index >= count($items)) {
             return 0;
         }
-        $memoKey = hash('sha256', (string)$index . (string)$knapsackSpace);
+        $memoKey = hash('sha256', (string)$index . '-' . (string)$knapsackSpace);
         if (array_key_exists($memoKey, $memo)) {
             return $memo[$memoKey];
         }
         if ($knapsackSpace < $items[$index]->weight) {
-            return 0;
+            $memo[$memoKey] = KnapsackMemoVer::add($items, $index + 1, $knapsackSpace, $memo);
+            return $memo[$memoKey];
         }
         $valueWithIndexItem = KnapsackMemoVer::add($items, $index + 1, $knapsackSpace - $items[$index]->weight, $memo) + $items[$index]->value;
         $valueWithoutIndexItem = KnapsackMemoVer::add($items, $index + 1, $knapsackSpace, $memo);
