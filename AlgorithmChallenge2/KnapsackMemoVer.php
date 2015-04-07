@@ -13,6 +13,7 @@ class KnapsackMemoVer
         $items = array_map(function($item) {
             return new Item($item[0], $item[1]);
         }, $items);
+        sort($items);  // array_mapの作る配列のindexは、元になる配列のindexに依存するため、ソートして0から始まるようにする。
 
         $memo = [];
         return KnapsackMemoVer::add($items, 0, $knapsack, $memo);
@@ -24,7 +25,7 @@ class KnapsackMemoVer
             return 0;
         }
         $memoKey = hash('sha256', (string)$index . '-' . (string)$knapsackSpace);
-        if (array_key_exists($memoKey, $memo)) {
+        if (isset($memo[$memoKey])) {
             return $memo[$memoKey];
         }
         if ($knapsackSpace < $items[$index]->weight) {
