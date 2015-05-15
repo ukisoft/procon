@@ -36,6 +36,8 @@ procon
 11. Knapsack
 12. LongestCommonSubsequence
 13. NoLimitKnapsack
+14. KnapsackSelect
+15. Knapsack2
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
