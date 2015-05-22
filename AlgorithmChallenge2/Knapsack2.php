@@ -12,28 +12,35 @@ class Knapsack2
             return new Item($item[0], $item[1]);
         }, $items);
 
-        $note = [(int)$knapsack => 0];
+        $note = [0 => 0];
         while (list($key, $item) = each($items)) {
             $nextNote = [];
-            while (list($knapsackSpace, $value) = each($note)) {
-                $nextKnapsackSpace = $knapsackSpace - $item->weight;
-                if ($nextKnapsackSpace < 0) {
+            while (list($value, $knapsackSpace) = each($note)) {
+                if ($knapsackSpace + $item->weight > $knapsack) {
                     continue;
                 }
-                if (array_key_exists($nextKnapsackSpace, $note)) {
-                    $nextNote[$nextKnapsackSpace] = max($value + $item->value, $note[$nextKnapsackSpace]);
+                $nextValue = $value + $item->value;
+                if (array_key_exists($nextValue, $note)) {
+                    $nextNote[$nextValue] = min($knapsackSpace + $item->weight, $note[$nextValue]);
                     continue;
                 }
-                $nextNote[$nextKnapsackSpace] = $value + $item->value;
+                $nextNote[$nextValue] = $knapsackSpace + $item->weight;
             }
             reset($note);
-            while (list($key, $value) = each($note)) {
-                if (array_key_exists($key, $nextNote) === false) {
-                    $nextNote[$key] = $value;
+            while (list($value, $weight) = each($note)) {
+                if (array_key_exists($value, $nextNote) === false) {
+                    $nextNote[$value] = $weight;
                 }
             }
             $note = $nextNote;
         }
-        return max($note);
+        reset($note);
+        $result = 0;
+        while (list($value, $weight) = each($note)) {
+            if ($result < $value) {
+                $result = $value;
+            }
+        }
+        return $result;
     }
 }
