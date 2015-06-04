@@ -38,6 +38,7 @@ procon
 13. NoLimitKnapsack
 14. KnapsackSelect
 15. Knapsack2
+16. PartialSumWithLimit
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
