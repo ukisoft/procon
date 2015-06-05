@@ -6,22 +6,26 @@ class PartialSumWithLimit
 {
     public static function calc($a, $m, $k)
     {
-        $dp = [$k];
+        $dp = [0];
         for ($i = 0; $i < count($a); $i++) {
-            for ($j = 0; $j < $m[$i]; $j++) {
-                $restCount = count($dp);
-                for ($l = 0; $l < $restCount; $l++) {
-                    $nextRest = $dp[$l] - $a[$i];
-                    if ($nextRest === 0) {
+            $nextCalcSet = [];
+            for ($j = 1; $j <= $m[$i]; $j++) {
+                $nextCalc = $a[$i] * $j;
+                if ($nextCalc === $k) {
+                    return true;
+                }
+                $nextCalcSet[] = $nextCalc;
+            }
+            $countDp = count($dp);
+            for ($j = 0; $j < $countDp; $j++) {
+                foreach ($nextCalcSet as $nextCalc) {
+                    $nextOneDp = $dp[$j] + $nextCalc;
+                    if ($nextOneDp === $k) {
                         return true;
                     }
-                    if ($nextRest < 0) {
-                        continue;
+                    if (in_array($nextOneDp, $dp) === false) {
+                        $dp[] = $nextOneDp;
                     }
-                    if (in_array($nextRest, $dp)) {
-                        continue;
-                    }
-                    $dp[] = $nextRest;
                 }
             }
         }

@@ -21,8 +21,11 @@ class PartialSumWithLimitTest extends \PHPUnit_Framework_TestCase
 
     public function provider()
     {
+
         return [[[3, 5, 8], [3, 2, 2], 17, true],
             [[3], [3], 12, false],
-            [[1], [100000], 100000, true]];
+            [[1], [100000], 100000, true],
+            [[1, 2], [99999, 1], 100000, true],
+            [[1, 2, 3, 4, 5], [10000, 10000, 10000, 10000, 10000], 100000, true]];
     }
 }
