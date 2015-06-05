@@ -6,36 +6,24 @@ class PartialSumWithLimit
 {
     public static function calc($a, $m, $k)
     {
-        $inputs = [];
-        array_map(function ($a, $m) use (&$inputs, $k) {
-            for ($i = 1; $i <= $m; $i++) {
-                $value = $a * $i;
-                if ($value <= $k) {
-                    $inputs[] = $value;
+        $dp = [$k];
+        for ($i = 0; $i < count($a); $i++) {
+            for ($j = 0; $j < $m[$i]; $j++) {
+                $restCount = count($dp);
+                for ($l = 0; $l < $restCount; $l++) {
+                    $nextRest = $dp[$l] - $a[$i];
+                    if ($nextRest === 0) {
+                        return true;
+                    }
+                    if ($nextRest < 0) {
+                        continue;
+                    }
+                    if (in_array($nextRest, $dp)) {
+                        continue;
+                    }
+                    $dp[] = $nextRest;
                 }
             }
-        }, $a, $m);
-        if (in_array($k, $inputs)) {
-            return true;
-        }
-        $inputs = array_unique($inputs);
-
-        $dp = [0];
-        foreach ($inputs as $value) {
-            $dpNum = count($dp);
-            for ($i = 0; $i < $dpNum; $i++) {
-                $nextValue = $dp[$i] + $value;
-                if ($nextValue === $k) {
-                    return true;
-                }
-                if ($nextValue > $k) {
-                    continue;
-                }
-                if (in_array($nextValue, $dp) === false) {
-                    $dp[] = $nextValue;
-                }
-            }
-            rsort($dp);
         }
         return false;
     }
