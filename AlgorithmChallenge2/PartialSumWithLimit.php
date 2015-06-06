@@ -6,27 +6,36 @@ class PartialSumWithLimit
 {
     public static function calc($a, $m, $k)
     {
-        $dp = [0];
-        for ($i = 0; $i < count($a); $i++) {
-            $nextCalcSet = [];
-            for ($j = 1; $j <= $m[$i]; $j++) {
-                $nextCalc = $a[$i] * $j;
-                if ($nextCalc === $k) {
-                    return true;
-                }
-                $nextCalcSet[] = $nextCalc;
+        $dp = [];
+        $dp[0] = [];
+        for ($i = 0; $i <= $k; $i++) {
+            if ($i === 0) {
+                $dp[0][$i] = 1;
+                continue;
             }
-            $countDp = count($dp);
-            for ($j = 0; $j < $countDp; $j++) {
-                foreach ($nextCalcSet as $nextCalc) {
-                    $nextOneDp = $dp[$j] + $nextCalc;
-                    if ($nextOneDp === $k) {
+            $dp[0][$i] = 0;
+        }
+
+        for ($i = 1; $i <= count($a); $i++) {
+            for ($j = 0; $j <= $k; $j++) {
+                if ($dp[$i - 1][$j] > 0) {
+                    if ($j === $k) {
                         return true;
                     }
-                    if (in_array($nextOneDp, $dp) === false) {
-                        $dp[] = $nextOneDp;
+                    $dp[$i][$j] = $m[$i - 1] + 1;
+                    continue;
+                }
+                if (array_key_exists($j - $a[$i - 1], $dp[$i])) {
+                    if ($dp[$i][$j - $a[$i - 1]] > 0) {
+                        if ($j === $k && ($dp[$i][$j - $a[$i - 1]] - 1) !== 0) {
+                            return true;
+                        }
+                        $dp[$i][$j] = $dp[$i][$j - $a[$i - 1]] - 1;
+                        continue;
                     }
                 }
+                $dp[$i][$j] = 0;
+                continue;
             }
         }
         return false;
