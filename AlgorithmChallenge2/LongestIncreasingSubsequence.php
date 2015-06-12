@@ -16,6 +16,6 @@ class LongestIncreasingSubsequence
                 }
             }
         }
-        return $dp[count($a) - 1];
+        return max($dp);
     }
 }
