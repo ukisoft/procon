@@ -39,6 +39,7 @@ procon
 14. KnapsackSelect
 15. Knapsack2
 16. PartialSumWithLimit
+17. LongestIncreasingSubsequence
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
