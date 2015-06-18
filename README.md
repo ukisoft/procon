@@ -40,6 +40,7 @@ procon
 15. Knapsack2
 16. PartialSumWithLimit
 17. LongestIncreasingSubsequence
+18. ItemSeparator
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
