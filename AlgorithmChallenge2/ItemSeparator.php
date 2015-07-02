@@ -16,22 +16,22 @@ class ItemSeparator
         $result = 0;
         $note = [];
         for ($i = 1; $i <= $m; $i++) {
-            $result += ItemSeparator::getSeparatePatternNum($n, $i, $note);
+            $result += ItemSeparator::getSeparatePatternNum($n, $i, $M, $note);
         }
         return $result % $M;
     }
 
-    private static function getSeparatePatternNum($targetNum, $separateNum, &$note)
+    private static function getSeparatePatternNum($targetNum, $separateNum, $M, &$note)
     {
         if ($targetNum === $separateNum || $separateNum === 1) {
             return 1;
         }
-        if (array_key_exists($targetNum, $note) && array_key_exists($separateNum, $note[$targetNum])) {
+        if (isset($note[$targetNum][$separateNum])) {
             return $note[$targetNum][$separateNum];
         }
         $result = 0;
         for ($i = 1; $i <= $targetNum - $separateNum; $i++) {
-            $result += ItemSeparator::getSeparatePatternNum($targetNum - $separateNum, $i, $note);
+            $result += ItemSeparator::getSeparatePatternNum($targetNum - $separateNum, $i, $M, $note) % $M;
         }
         $note[$targetNum][$separateNum] = $result;
         return $result;
