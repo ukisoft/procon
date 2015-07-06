@@ -31,7 +31,7 @@ class ItemSeparator
         }
         $result = 0;
         for ($i = 1; $i <= $targetNum - $separateNum; $i++) {
-            $result += ItemSeparator::getSeparatePatternNum($targetNum - $separateNum, $i, $M, $note) % $M;
+            $result += ItemSeparator::getSeparatePatternNum(min($targetNum - $separateNum, $separateNum), $i, $M, $note) % $M;
         }
         $note[$targetNum][$separateNum] = $result;
         return $result;

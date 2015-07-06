@@ -21,6 +21,6 @@ class ItemSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function provider()
     {
-        return [[4, 3, 10000, 4]];
+        return [[4, 3, 10000, 4], [5, 5, 10000, 7]];
     }
 }
