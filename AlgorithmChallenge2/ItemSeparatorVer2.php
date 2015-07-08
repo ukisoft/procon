@@ -23,7 +23,7 @@ class ItemSeparatorVer2
         }
         $ev1 = ItemSeparatorVer2::getSeparatePatternNum($targetNum, $separateNum - 1, $M, $note);
         $ev2 = ItemSeparatorVer2::getSeparatePatternNum($targetNum - $separateNum, min($targetNum - $separateNum, $separateNum), $M, $note);
-        $note[$targetNum][$separateNum] = $ev1 + $ev2;
-        return $ev1 + $ev2;
+        $note[$targetNum][$separateNum] = ($ev1 + $ev2) % $M;
+        return ($ev1 + $ev2) % $M;
     }
 }
