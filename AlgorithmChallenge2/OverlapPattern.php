@@ -9,6 +9,9 @@ class OverlapPattern
         /**
          * f($n, $m, $a) = f($n - 1, $m, $a[1:]) + f($n -1, $m - 1, $a[1:]) + ... + f($n -1, 0, $a[1:])
          */
+        if ($n === 1) {
+            return 1;
+        }
         $result = 0;
         $note = [];
         $limit = array_shift($a);
@@ -20,6 +23,9 @@ class OverlapPattern
 
     private static function calcPartial($n, $m, $a, $M, &$note)
     {
+        if ($m === 1 && $a[0] < $n) {
+            return 0;
+        }
         if ($n === 1 || $m === 0) {
             return 1;
         }
