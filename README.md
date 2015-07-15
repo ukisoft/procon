@@ -41,6 +41,7 @@ procon
 16. PartialSumWithLimit
 17. LongestIncreasingSubsequence
 18. ItemSeparator
+19. OverlapPattern
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
