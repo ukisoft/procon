@@ -9,12 +9,6 @@ class OverlapPattern
         /**
          * f($n, $m, $a) = f($n - 1, $m, $a[1:]) + f($n -1, $m - 1, $a[1:]) + ... + f($n -1, 0, $a[1:])
          */
-        if ($n === 1 && $a[0] < $m) {
-            return 0;
-        }
-        if ($n === 1) {
-            return 1;
-        }
         $note = [];
         return OverlapPattern::calcPartial($n, $m, $a, $M, $note) % $M;
     }
