@@ -32,6 +32,7 @@ class OverlapPattern
         for ($i = 0; $i <= min($m, $limit); $i++) {
             $result += OverlapPattern::calcPartial($n - 1, $m - $i, $a, $M, $note) % $M;
         }
-        return $result % $M;
+        $note[$key] = $result % $M;
+        return $note[$key];
     }
 }
