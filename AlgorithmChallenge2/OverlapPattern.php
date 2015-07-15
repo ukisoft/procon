@@ -23,7 +23,7 @@ class OverlapPattern
 
     private static function calcPartial($n, $m, $a, $M, &$note)
     {
-        if ($m === 1 && $a[0] < $n) {
+        if ($n === 1 && $a[0] < $m) {
             return 0;
         }
         if ($n === 1 || $m === 0) {
