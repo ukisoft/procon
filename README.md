@@ -22,7 +22,7 @@ procon
 18. CirclesCountry
 19. HamiltonPath
 
-## AlgorithmChallenge2
+## AlgorithmChallenge2_1_dp
 1. AntsWalingTimeCalculator
 2. PartialSumChecker
 3. LakeCounter
@@ -42,6 +42,10 @@ procon
 17. LongestIncreasingSubsequence
 18. ItemSeparator
 19. OverlapPattern
+
+## AlgorithmChallenge2_2_data_structure
+1. Expedition
+2. Fence Repair
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
