@@ -46,6 +46,7 @@ procon
 ## AlgorithmChallenge2_2_data_structure
 1. Expedition
 2. Fence Repair
+3. Eating Chain
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
