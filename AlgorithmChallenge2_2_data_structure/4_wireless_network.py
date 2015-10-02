@@ -1,4 +1,6 @@
 
+import math
+import random
 from datetime import datetime
 
 
@@ -33,6 +35,7 @@ class UnionFind(object):
 def solve(n, d, info):
     uf = UnionFind(n)
     computers = {}
+    calc_note = {}
     for i in range(n, len(info)):
         if info[i][0] == 'O':
             target_key = info[i][1]
@@ -40,7 +43,14 @@ def solve(n, d, info):
             for key, computer in computers.items():
                 if key == target_key:
                     continue
-                if ((computer[0] - target_computer[0])**2 + (computer[1] - target_computer[1])**2)**(1/2) <= d:
+                calc_note_key = (computer[0], computer[1], target_computer[0], target_computer[1])
+                if calc_note_key in calc_note:
+                    if calc_note[calc_note_key] <= d:
+                        uf.union(target_key - 1, key - 1)
+                    continue
+                calc_result = ((computer[0] - target_computer[0])**2 + (computer[1] - target_computer[1])**2)**(1/2)
+                calc_note[calc_note_key] = calc_result
+                if calc_result <= d:
                     uf.union(target_key - 1, key - 1)
         if info[i][0] == 'S':
             if uf.same(info[i][1] - 1, info[i][2] - 1):
@@ -51,4 +61,9 @@ def solve(n, d, info):
 if __name__ == '__main__':
     print(datetime.now())
     solve(4, 1, [(0, 1), (0, 2), (0, 3), (0, 4), ('O', 1), ('O', 2), ('O', 4), ('S', 1, 4), ('O', 3), ('S', 1, 4)])
+    max_info = [(math.floor(random.random() * 10000), math.floor(random.random() * 10000)) for i in range(1000)]
+    max_info.extend([('O', math.floor(random.random() * 1000 + 1)) if math.floor(random.random() * 10) % 2 == 0 else
+                     ('S', math.floor(random.random() * 1000 + 1), math.floor(random.random() * 1000 + 1))
+                     for i in range(300000)])
+    solve(1001, 20000, max_info)
     print(datetime.now())
