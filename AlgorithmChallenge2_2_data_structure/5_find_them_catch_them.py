@@ -39,20 +39,22 @@ def solve(n, info):
             if key == 0:
                 continue
             if value[0] == 'D':
-                uf.union(value[1], value[2] + crime_max)
-                uf.union(value[2], value[1] + crime_max)
+                uf.union(value[1] - 1, value[2] - 1 + crime_max)
+                uf.union(value[2] - 1, value[1] - 1 + crime_max)
                 checked.append(value[1])
                 checked.append(value[2])
             if value[0] == 'A':
-                if value[1] not in checked or value[2] not in checked:
-                    print('Not sure yet.')
-                    continue
-                if uf.same(value[1], value[2] + crime_max) or uf.same(value[2], value[1] + crime_max):
+                if uf.same(value[1] - 1, value[2] - 1 + crime_max) or uf.same(value[2] - 1, value[1] - 1 + crime_max):
                     print('In different gangs.')
                     continue
-                print('In the same gang.')
+                if uf.same(value[1] - 1, value[2] - 1):
+                    print('In the same gang.')
+                    continue
+                print('Not sure yet.')
 
 if __name__ == '__main__':
     print(datetime.now())
     solve(1, [[(5, 5), ('A', 1, 2), ('D', 1, 2), ('A', 1, 2), ('D', 2, 4), ('A', 1, 4)]])
+    solve(1, [[(2, 1), ('D', 1, 2)]])
+    solve(1, [[(4, 3), ('D', 1, 2), ('D', 3, 4), ('A', 1, 3)]])
     print(datetime.now())
