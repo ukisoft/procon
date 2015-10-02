@@ -44,7 +44,7 @@ def solve(n, info):
                 if uf.same(value[1] - 1, value[2] - 1 + crime_max) or uf.same(value[2] - 1, value[1] - 1 + crime_max):
                     print('In different gangs.')
                     continue
-                if uf.same(value[1] - 1, value[2] - 1):
+                if uf.same(value[1] - 1, value[2] - 1) or uf.same(value[1] - 1 + crime_max, value[2] - 1 + crime_max):
                     print('In the same gang.')
                     continue
                 print('Not sure yet.')

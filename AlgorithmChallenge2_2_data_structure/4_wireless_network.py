@@ -35,22 +35,18 @@ class UnionFind(object):
 def solve(n, d, info):
     uf = UnionFind(n)
     computers = {}
-    calc_note = {}
-    for i in range(n, len(info)):
+    note = []
+    for i in range(n, len(info)):  # 重複してるOは2回計算しない
         if info[i][0] == 'O':
             target_key = info[i][1]
+            if target_key in note:
+                continue
+            note.append(target_key)
             target_computer = computers[target_key] = info[target_key - 1]
             for key, computer in computers.items():
                 if key == target_key:
                     continue
-                calc_note_key = (computer[0], computer[1], target_computer[0], target_computer[1])
-                if calc_note_key in calc_note:
-                    if calc_note[calc_note_key] <= d:
-                        uf.union(target_key - 1, key - 1)
-                    continue
-                calc_result = ((computer[0] - target_computer[0])**2 + (computer[1] - target_computer[1])**2)**(1/2)
-                calc_note[calc_note_key] = calc_result
-                if calc_result <= d:
+                if ((computer[0] - target_computer[0])**2 + (computer[1] - target_computer[1])**2)**(1/2) <= d:
                     uf.union(target_key - 1, key - 1)
         if info[i][0] == 'S':
             if uf.same(info[i][1] - 1, info[i][2] - 1):
