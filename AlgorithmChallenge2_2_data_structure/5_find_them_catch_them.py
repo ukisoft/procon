@@ -34,15 +34,12 @@ def solve(n, info):
     crime_max = 10**5
     for case in info:
         uf = UnionFind(case[0][0] + crime_max)
-        checked = []
         for key, value in enumerate(case):
             if key == 0:
                 continue
             if value[0] == 'D':
                 uf.union(value[1] - 1, value[2] - 1 + crime_max)
                 uf.union(value[2] - 1, value[1] - 1 + crime_max)
-                checked.append(value[1])
-                checked.append(value[2])
             if value[0] == 'A':
                 if uf.same(value[1] - 1, value[2] - 1 + crime_max) or uf.same(value[2] - 1, value[1] - 1 + crime_max):
                     print('In different gangs.')
