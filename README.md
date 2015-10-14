@@ -49,6 +49,7 @@ procon
 3. Eating Chain
 4. Wireless Network
 5. Find them, Catch them
+6. Two Graph Judge
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
