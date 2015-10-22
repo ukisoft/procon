@@ -10,13 +10,9 @@ def solve(paths, start, goal):
     steps = []
     h = []
     for path in paths:
-        if path[0] not in _map:
-            _map[path[0]] = []
-        _map[path[0]].append((path[1], path[2]))
+        _map.setdefault(path[0], []).append((path[1], path[2]))
+        _map.setdefault(path[1], []).append((path[0], path[2]))
         dp[path[0]] = 99999
-        if path[1] not in _map:
-            _map[path[1]] = []
-        _map[path[1]].append((path[0], path[2]))
         dp[path[1]] = 99999
     dp[start] = 0
     heappush(h, (0, start))
