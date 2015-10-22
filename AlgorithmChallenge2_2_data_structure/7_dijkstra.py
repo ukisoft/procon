@@ -1,7 +1,6 @@
 
 from datetime import datetime
 from heapq import heappush, heappop
-from copy import copy
 
 
 def solve(paths, start, goal):
@@ -31,14 +30,13 @@ def solve(paths, start, goal):
 
 
 def get_next():
-    _dp = copy(dp)
-    for step in steps:
-        _dp.pop(step)
-    if len(_dp) == 0:
-        return None
     h = []
-    for key, value in _dp.items():
+    for key, value in dp.items():
+        if key in steps:
+            continue
         heappush(h, (value, key))
+    if len(h) == 0:
+        return None
     return heappop(h)[1]
 
 
