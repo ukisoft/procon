@@ -14,12 +14,10 @@ def solve(paths, start, goal):
             _map[path[0]] = []
         _map[path[0]].append((path[1], path[2]))
         dp[path[0]] = 99999
-        heappush(h, (99999, path[0]))
         if path[1] not in _map:
             _map[path[1]] = []
         _map[path[1]].append((path[0], path[2]))
         dp[path[1]] = 99999
-        heappush(h, (99999, path[1]))
     dp[start] = 0
     heappush(h, (0, start))
     _solve(start)
