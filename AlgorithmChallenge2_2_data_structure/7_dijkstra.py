@@ -4,20 +4,24 @@ from heapq import heappush, heappop
 
 
 def solve(paths, start, goal):
-    global _map, dp, steps
+    global _map, dp, steps, h
     _map = {}
     dp = {}
     steps = []
+    h = []
     for path in paths:
         if path[0] not in _map:
             _map[path[0]] = []
         _map[path[0]].append((path[1], path[2]))
         dp[path[0]] = 99999
+        heappush(h, (99999, path[0]))
         if path[1] not in _map:
             _map[path[1]] = []
         _map[path[1]].append((path[0], path[2]))
         dp[path[1]] = 99999
+        heappush(h, (99999, path[1]))
     dp[start] = 0
+    heappush(h, (0, start))
     _solve(start)
     while True:
         _next = get_next()
@@ -30,14 +34,15 @@ def solve(paths, start, goal):
 
 
 def get_next():
-    h = []
-    for key, value in dp.items():
-        if key in steps:
+    while True:
+        if len(h) == 0:
+            return None
+        node = heappop(h)
+        if node[1] in steps:
             continue
-        heappush(h, (value, key))
-    if len(h) == 0:
-        return None
-    return heappop(h)[1]
+        if node[0] > dp[node[1]]:
+            continue
+        return node[1]
 
 
 def _solve(target):
@@ -47,7 +52,9 @@ def _solve(target):
     for path in _map[target]:
         if path[0] in steps:
             continue
-        dp[path[0]] = min([dp[path[0]], path[1] + dp[target]])
+        min_cost = min([dp[path[0]], path[1] + dp[target]])
+        dp[path[0]] = min_cost
+        heappush(h, (min_cost, path[0]))
 
 
 if __name__ == '__main__':
