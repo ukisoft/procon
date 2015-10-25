@@ -90,6 +90,151 @@ class Bars(object):
         self.word = _next
         return self.word
 
+    # not work well
+    # def before(self):
+    #     _before = ''
+    #     if len(self.word) == 1:
+    #         if self.word == ' ':
+    #             _before = ' '
+    #         if self.word == 'i':
+    #             _before = 'T'
+    #         if self.word == 'T':
+    #             _before = 'i'
+    #         if self.word == 'I':
+    #             _before = 'I'
+    #         self.word = _before
+    #         return self.word
+    #     prohibits = [set() for _ in range(len(self.word))]
+    #     while True:
+    #         end = True
+    #         for i in range(len(self.word)):
+    #             if len(prohibits[i]) == 3:
+    #                 continue
+    #             end = False
+    #             left = i - 1
+    #             right = i + 1
+    #             if i == 0:
+    #                 left = len(self.word) - 1
+    #             if i == len(self.word) - 1:
+    #                 right = 0
+    #             if self.word[i] == ' ':
+    #                 prohibits[i].add('i')
+    #                 prohibits[i].add('I')
+    #                 if ' ' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                 if 'T' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                 if ' ' in prohibits[right] and 'T' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add('T')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add(' ')
+    #                 if 'i' in prohibits[right] and 'I' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add(' ')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add('T')
+    #             if self.word[i] == 'i':
+    #                 prohibits[i].add('i')
+    #                 prohibits[i].add('I')
+    #                 if ' ' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                 if 'T' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                 if ' ' in prohibits[right] and 'T' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add(' ')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add('T')
+    #                 if 'i' in prohibits[right] and 'I' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add('T')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add(' ')
+    #             if self.word[i] == 'T':
+    #                 prohibits[i].add(' ')
+    #                 prohibits[i].add('T')
+    #                 if 'i' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                 if 'I' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                 if ' ' in prohibits[right] and 'T' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add('I')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add('i')
+    #                 if 'i' in prohibits[right] and 'I' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add('i')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add('I')
+    #             if self.word[i] == 'I':
+    #                 prohibits[i].add(' ')
+    #                 prohibits[i].add('T')
+    #                 if 'i' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                 if 'I' in prohibits[i]:
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[right].add(' ')
+    #                         prohibits[right].add('T')
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[right].add('i')
+    #                         prohibits[right].add('I')
+    #                 if ' ' in prohibits[right] and 'T' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add('i')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add('I')
+    #                 if 'i' in prohibits[right] and 'I' in prohibits[right]:
+    #                     if 'i' in prohibits[left] and 'I' in prohibits[left]:
+    #                         prohibits[i].add('I')
+    #                     if ' ' in prohibits[left] and 'T' in prohibits[left]:
+    #                         prohibits[i].add('i')
+    #         if end:
+    #             break
+    #     for prohibit in prohibits:
+    #         for word in [' ', 'i', 'I', 'T']:
+    #             if word not in prohibit:
+    #                 _before += word
+    #                 continue
+    #     self.word = _before
+    #     return self.word
+
     def __str__(self):
         return self.word
 
@@ -155,8 +300,8 @@ def decode_morse(target: str):
     return decoded
 
 
-def find_answer():
-    bs = Bars("I    IT ii  i I   I i   i   I  T")
+def find_next_answer():
+    bs = Bars('I    IT ii  i I   I i   i   I  T')
     for i in range(26):
         print(bs)
         bs.next()
@@ -164,8 +309,18 @@ def find_answer():
     print(decode_morse(bs.__str__()))
 
 
+def find_before_answer():
+    bs = Bars('T i  I Iii  TTT')
+    while True:
+        before = bs.__str__()
+        print(bs.next())
+        if bs.__str__() == 'ITT TI I T TIii':
+            print(decode_morse(before))
+            return
+
 if __name__ == "__main__":
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestBars))
     unittest.TextTestRunner(verbosity=2).run(suite)
-    find_answer()
+    find_next_answer()
+    find_before_answer()
