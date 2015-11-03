@@ -51,6 +51,7 @@ procon
 5. Find them, Catch them
 6. Two Graph Judge
 7. Dijkstra
+8. Roadblocks
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
