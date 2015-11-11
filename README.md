@@ -72,3 +72,8 @@ procon
 1. SelectionSort
 2. QuickSort
 3. HeapSort
+
+## Others
+1. Vector
+2. SimpleBars
+3. Fibonacci
