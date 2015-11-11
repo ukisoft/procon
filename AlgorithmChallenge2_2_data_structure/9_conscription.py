@@ -12,16 +12,15 @@ def solve(women_num, men_num, relation_num, relations):
     cost = 0
     note = set()
     while len(h) > 0:
-        relation = heappop(h)
-        if relation[1] in note and relation[2] in note:
+        _cost, man_no, woman_no = heappop(h)
+        if man_no in note and woman_no in note:
             continue
-        if relation[1] not in note and relation[2] not in note:
+        if man_no not in note and woman_no not in note:
             cost += _MAX_COST
-        cost += relation[0]
-        note.add(relation[1])
-        note.add(relation[2])
-    result = cost + _MAX_COST * (women_num + men_num - len(note))
-    return result
+        cost += _cost
+        note.add(man_no)
+        note.add(woman_no)
+    return cost + _MAX_COST * (women_num + men_num - len(note))
 
 if __name__ == '__main__':
     print(datetime.now())
