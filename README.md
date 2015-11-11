@@ -52,6 +52,7 @@ procon
 6. Two Graph Judge
 7. Dijkstra
 8. Roadblocks
+9. Conscription
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
