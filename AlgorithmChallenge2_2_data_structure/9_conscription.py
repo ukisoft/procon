@@ -6,6 +6,12 @@ _MAX_COST = 10000
 
 
 def solve(women_num, men_num, relation_num, relations):
+    people_num = women_num + men_num
+    full_relations = [[_MAX_COST for _ in range(people_num)] for _ in range(people_num)]
+    for man_no, woman_no, relation in relations:
+        if full_relations[man_no][men_num + woman_no] > _MAX_COST - relation:
+            full_relations[man_no][men_num + woman_no] = _MAX_COST - relation
+            full_relations[men_num + woman_no][man_no] = _MAX_COST - relation
     h = []
     heappush(h, (_MAX_COST, 0))
     cost = 0
@@ -18,19 +24,12 @@ def solve(women_num, men_num, relation_num, relations):
         cost += _cost
         if len(team) == women_num + men_num:
             break
-        for man_no, woman_no, relation_num in relations:
-            if man_no in team and men_num + woman_no + 1 in team:
-                continue
-            if man_no in team:
-                heappush(h, (_MAX_COST - relation_num, men_num + woman_no + 1))
-                continue
-            if men_num + woman_no + 1 in team:
-                heappush(h, (_MAX_COST - relation_num, man_no))
-                continue
-            heappush(h, (_MAX_COST, man_no))
-            heappush(h, (_MAX_COST, men_num + woman_no + 1))
-    cost += (women_num + men_num - len(team)) * _MAX_COST
-    return cost
+        for first_person in team:
+            for second_person in range(people_num):
+                if second_person in team:
+                    continue
+                heappush(h, (full_relations[first_person][second_person], second_person))
+    return cost + _MAX_COST * (people_num - len(team))
 
 if __name__ == '__main__':
     print(datetime.now())
