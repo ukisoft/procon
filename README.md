@@ -53,6 +53,7 @@ procon
 7. Dijkstra
 8. Roadblocks
 9. Conscription
+10. Layout
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
