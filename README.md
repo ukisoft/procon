@@ -54,6 +54,7 @@ procon
 8. Roadblocks
 9. Conscription
 10. Layout
+11. points_on_line
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
