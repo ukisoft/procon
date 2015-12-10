@@ -22,7 +22,7 @@ procon
 18. CirclesCountry
 19. HamiltonPath
 
-## AlgorithmChallenge2_1_dp
+## AntBook_php
 1. AntsWalingTimeCalculator
 2. PartialSumChecker
 3. LakeCounter
@@ -43,7 +43,7 @@ procon
 18. ItemSeparator
 19. OverlapPattern
 
-## AlgorithmChallenge2_2_data_structure
+## AntBook_python
 1. Expedition
 2. Fence Repair
 3. Eating Chain
