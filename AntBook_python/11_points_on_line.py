@@ -12,7 +12,7 @@ def solve(_start, _end):
     end = Point(x=_end[0], y=_end[1])
     if start.x == end.x and start.y == end.y:
         return 0
-    return fabs(floor(gcd(end.x - start.x, end.y - start.y))) - 1  # 終点を引く
+    return gcd(fabs(end.x - start.x), fabs(end.y - start.y)) - 1  # 終点を引く
 
 if __name__ == '__main__':
     print(datetime.now())
