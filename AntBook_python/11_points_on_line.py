@@ -2,7 +2,7 @@
 from collections import namedtuple
 from datetime import datetime
 from fractions import gcd
-from math import fabs, floor
+from math import fabs
 
 Point = namedtuple('Point', ('x', 'y'))
 
