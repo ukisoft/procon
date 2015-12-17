@@ -55,6 +55,7 @@ procon
 9. Conscription
 10. Layout
 11. points_on_line
+12. snakes_and_ladders
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
