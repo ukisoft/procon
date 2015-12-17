@@ -12,19 +12,16 @@ def solve(a, b):
     :param b:
     """
     gcd_num = gcd(a, b)
-    a_list = []
-    for i in range(b * gcd_num):
-        if i == 0:
-            continue
-        a_list.append(a * i)
     for i in range(a * gcd_num):
         if i == 0:
             continue
-        for _a in a_list:
-            if _a - b * i == 1:
-                return _a / a, 0, 0, i
-            if -_a + b * i == 1:
-                return 0, i, _a / a, 0
+        for j in range(b * gcd_num):
+            if j == 0:
+                continue
+            if a * j - b * i == 1:
+                return j, 0, 0, i
+            if -a * j + b * i == 1:
+                return 0, i, j, 0
     return -1
 
 
