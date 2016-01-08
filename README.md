@@ -56,6 +56,7 @@ procon
 10. Layout
 11. points_on_line
 12. snakes_and_ladders
+13. prime_number
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
