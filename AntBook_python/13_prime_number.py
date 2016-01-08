@@ -10,6 +10,7 @@ def solve(target):
     targetの平方根を求める
     求めた値以下の自然数の中で、素数のものでtargetを割り、あまりがでないものが１つでもあればtargetは素数
     そうでなければ素数ではない
+    http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1413052429
     :param int target:
     :return:
     """
