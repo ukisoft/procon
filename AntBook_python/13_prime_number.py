@@ -31,5 +31,7 @@ if __name__ == '__main__':
     print(solve(3) is True)
     print(solve(13) is True)
     print(solve(25) is False)
+    print(solve(53) is True)
+    print(solve(295927) is False)
     print(solve(9999973) is True)
     print(datetime.now())
