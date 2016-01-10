@@ -1,31 +1,33 @@
 
 from datetime import datetime
-from fractions import gcd
 
 
 def solve(a, b):
-    """
-    aとbの最小公倍数までの値を、それぞれ求める
-    aは-b、bは-aと、１つずつ足し算をし、１になったら、その組み合わせが答え
-    なければ−１を返す
-    :param a:
-    :param b:
-    """
-    gcd_num = gcd(a, b)
-    for i in range(a * gcd_num):
-        if i == 0:
-            continue
-        for j in range(b * gcd_num):
-            if j == 0:
-                continue
-            if a * j - b * i == 1:
-                return j, 0, 0, i
-            if -a * j + b * i == 1:
-                return 0, i, j, 0
-    return -1
+    stack = []
+    while True:
+        a, b, c = b % a, a, b // a
+        stack.append(c)
+        if a == 0:
+            if b != 1:
+                return -1
+            break
+    x, y = 0, 1
+    while True:
+        if len(stack) == 0:
+            break
+        c = stack.pop()
+        x, y = y - c * x, x
+    if x > 0:
+        if y > 0:
+            return x, y, 0, 0
+        return x, 0, 0, -y
+    if y > 0:
+        return 0, y, -x, 0
+    return 0, 0, -x, -y
 
 
 if __name__ == '__main__':
     print(datetime.now())
     print((3, 0, 0, 1) == solve(4, 11))
+    print(solve(999998764, 999999997))
     print(datetime.now())
