@@ -23,6 +23,18 @@ def solve(target):
             return False
     _note[target] = True
     return True
+
+
+def solve2(target):
+    if target == 1:
+        return False
+    if target == 2:
+        return True
+    sq = floor(sqrt(target))
+    for i in range(2, sq + 1):
+        if target % i == 0:
+            return False
+    return True
     
 
 if __name__ == '__main__':
@@ -35,4 +47,12 @@ if __name__ == '__main__':
     print(solve(53) is True)
     print(solve(295927) is False)
     print(solve(9999973) is True)
+    print(solve2(4) is False)
+    print(solve2(3) is True)
+    print(solve2(2) is True)
+    print(solve2(13) is True)
+    print(solve2(25) is False)
+    print(solve2(53) is True)
+    print(solve2(295927) is False)
+    print(solve2(9999973) is True)
     print(datetime.now())
