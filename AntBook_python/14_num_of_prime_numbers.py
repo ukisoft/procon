@@ -1,5 +1,6 @@
 
 from datetime import datetime
+from math import sqrt, floor
 
 
 def solve(target):
@@ -7,17 +8,19 @@ def solve(target):
         return 0
     prime_judges = {i: True for i in range(1, target + 1)}
     prime_judges[1] = False
-    result = 0
-    for i in range(2, target + 1):
+    sq = floor(sqrt(target))
+    for i in range(2, sq + 1):
         for j in range(i, target + 1):
             if prime_judges[j] is False:
                 continue
             if j == i:
-                if prime_judges[j] is True:
-                    result += 1
                 continue
             if j % i == 0:
                 prime_judges[j] = False
+    result = 0
+    for judge in prime_judges.values():
+        if judge is True:
+            result += 1
     return result
 
 
