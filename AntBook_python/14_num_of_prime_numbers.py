@@ -6,19 +6,16 @@ from math import sqrt, floor
 def solve(target):
     if target == 0 or target == 1:
         return 0
-    prime_judges = {i: True for i in range(1, target + 1)}
-    prime_judges[1] = False
+    prime_judges = [True for _ in range(target)]
+    prime_judges[0] = False
     sq = floor(sqrt(target))
     for i in range(2, sq + 1):
-        for j in range(i, target + 1):
-            if prime_judges[j] is False:
-                continue
-            if j == i:
-                continue
-            if j % i == 0:
-                prime_judges[j] = False
+        j = i**2
+        while j <= target:
+            prime_judges[j - 1] = False
+            j += i
     result = 0
-    for judge in prime_judges.values():
+    for judge in prime_judges:
         if judge is True:
             result += 1
     return result
