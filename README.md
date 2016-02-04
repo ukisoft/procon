@@ -58,6 +58,7 @@ procon
 12. snakes_and_ladders
 13. prime_number
 14. num_of_prime_numbers
+15. num_of_prime_numbers_in_some_range
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
