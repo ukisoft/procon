@@ -8,12 +8,18 @@ def solve(a, b):
         return 0
     prime_judges = [True for _ in range(b - a)]
     sq = floor(sqrt(b))
-    for i in range(2, sq + 1):  # todo 1 - ルートb までの list を別にもち、そこでも素数かどうかを管理して次の行を早める
+    # 1 - ルートb までの list を別にもち、そこでも素数かどうかを管理して次の行を早める <- 遅くなったのでコメントアウト・・
+    # _prime_judges = [True for _ in range(sq + 1)]
+    for i in range(2, sq + 1):
+        # if _prime_judges[i] is False:
+        #     continue
         j = (a // i) * i + (0 if a % i == 0 else i)
         if a // i <= 1:  # ルート b よりも a が小さい場合、i が素数の場合でも素数ではないと判断されてしまうため
             j += i
         while a <= j < b:
             prime_judges[j - a] = False
+            # if j < sq + 1:
+            #     _prime_judges[j] = False
             j += i
     result = 0
     for i, judge in enumerate(prime_judges):
