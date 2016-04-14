@@ -4,8 +4,7 @@ from datetime import datetime
 
 def solve(n: int, x: tuple, y: tuple):
     _x = sorted(x)
-    _y = sorted(y)
-    _y.reverse()
+    _y = sorted(y, reverse=True)
     result = 0
     for __x, __y in zip(_x, _y):
         result += __x * __y
