@@ -60,6 +60,7 @@ procon
 14. num_of_prime_numbers
 15. num_of_prime_numbers_in_some_range
 16. carmichael numbers
+17. minimum scalar product
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
