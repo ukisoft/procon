@@ -62,6 +62,7 @@ procon
 16. carmichael numbers
 17. minimum scalar product
 18. crazy rows
+19. Bribe the Prisoners
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
