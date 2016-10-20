@@ -1,8 +1,6 @@
 
 from datetime import datetime
 
-_TARGET = 1000000
-
 
 def solve(n: int, a: list, k: int):
     if a[n - 1] < k:
