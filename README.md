@@ -63,6 +63,7 @@ procon
 17. minimum scalar product
 18. crazy rows
 19. Bribe the Prisoners
+20. Millionaire
 21. lower bound
 
 ## VipAlgorithm
