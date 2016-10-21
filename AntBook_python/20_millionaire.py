@@ -13,7 +13,7 @@ def solve(rest_round, win_rate, money):
     if rest_round == 1:
         return win_rate
     result = 0
-    for target in range(0, _TARGET // 2 + 1, minimum):
+    for target in range(0, money + 1, minimum):
         result = max([result, (solve(rest_round - 1, win_rate, money - target) * (1 - win_rate) +
                                solve(rest_round - 1, win_rate, money + target) * win_rate)])
     return result
