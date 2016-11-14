@@ -65,6 +65,7 @@ procon
 19. Bribe the Prisoners
 20. Millionaire
 21. lower bound
+22. Cable master
 
 ## VipAlgorithm
 - http://vipprog.net/wiki/exercise.html
